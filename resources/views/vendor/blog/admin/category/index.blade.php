@@ -17,9 +17,9 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                     
-                    <li class="{!!(request('status') == 'archive')?'active':'';!!}"><a href="{!!guard_url('blog/blog')!!}">Blog</a></li>
+                    <li class="{!!(request('status') == 'archive')?'active':'';!!}"><a href="{!!guard_url('blog/blog')!!}">博客</a></li>
                     <li class="{!!(request('status') == '')?'active':'';!!}"><a href="{!!guard_url('blog/category')!!}">{!! trans('blog::category.names') !!}</a></li>
-                    <li class="{!!(request('status') == 'deleted')?'active':'';!!}"><a href="{!!guard_url('blog/tag')!!}">Tag</a></li>
+                    <li class="{!!(request('status') == 'deleted')?'active':'';!!}"><a href="{!!guard_url('blog/tag')!!}">标签</a></li>
                     <li class="pull-right">
                     <span class="actions">
                     <!--   

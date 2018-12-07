@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'name'          => 'Blog',
-    'names'         => 'Blogs',
+    'name'          => '博客',
+    'names'         => '博客',
 ];

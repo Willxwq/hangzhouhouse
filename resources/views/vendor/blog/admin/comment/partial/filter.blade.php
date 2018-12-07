@@ -2,13 +2,13 @@
     <button class="btn btn-xs btn-danger btn-search" type="button">
         <i aria-hidden="true" class="fa fa-search">
         </i>
-        <span class="hidden-sm hidden-xs"> Search</span>
+        <span class="hidden-sm hidden-xs"> 搜索</span>
     </button>
     <button aria-expanded="false" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" type="button">
         <span class="caret">
         </span>
         <span class="sr-only">
-            Toggle Dropdown
+            切换下拉列表
         </span>
     </button>
     <ul class="dropdown-menu" role="menu">
@@ -16,14 +16,14 @@
             <a class="btn-search" style="cursor:pointer;">
                 <i aria-hidden="true" class="fa fa-fw fa-filter">
                 </i>
-                Show filters
+                显示过滤器
             </a>
         </li>
         <li>
             <a class="btn-reset-filter" style="cursor:pointer;">
                 <i class="fa fa-fw fa-ban text-danger">
                 </i>
-                Clear filters
+                清除过滤器
             </a>
         </li>
         <li class="divider">
@@ -32,14 +32,14 @@
             <a class="btn-save" style="cursor:pointer;">
                 <i aria-hidden="true" class="fa fa-fw fa-floppy-o">
                 </i>
-                Save search
+                保存搜索
             </a>
         </li>
         <li>
             <a class="btn-open" style="cursor:pointer;">
                 <i aria-hidden="true" class="fa fa-fw fa-folder-open-o">
                 </i>
-                Saved searches
+                保存的搜索
             </a>
         </li>
     </ul>
@@ -50,7 +50,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #dd4b39; color: #fff;">
               <button type="button" class="close" data-dismiss="modal" aaria-hidden="true">&times;</button>
-              <h4 class="modal-title">Search</h4>
+              <h4 class="modal-title">搜索</h4>
             </div>
               {!!Form::horizontal_open()
               ->id('form-search')
@@ -146,12 +146,12 @@
                         <button aria-label="Close" class="btn pull-right btn-danger" data-dismiss="modal" type="button">
                             <i class="fa fa-times-circle">
                             </i>
-                            Close
+                            关闭
                         </button>
                         <button class="btn btn-success pull-right " id="btn-apply-search" name="new" style="margin-right:1%" type="button">
                             <i class="fa fa-check-circle">
                             </i>
-                            Search
+                            搜索
                         </button>
                     </div>
                 </div>

@@ -17,8 +17,8 @@
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                     
-                     <li class="{!!(request('status') == 'archive')?'active':'';!!}"><a href="{!!guard_url('blog/blog')!!}">Blog</a></li>
-                    <li class="{!!(request('status') == 'archive')?'active':'';!!}"><a href="{!!guard_url('blog/category')!!}">Category</a></li>
+                     <li class="{!!(request('status') == 'archive')?'active':'';!!}"><a href="{!!guard_url('blog/blog')!!}">博客</a></li>
+                    <li class="{!!(request('status') == 'archive')?'active':'';!!}"><a href="{!!guard_url('blog/category')!!}">分类</a></li>
                     <li class="{!!(request('status') == '')?'active':'';!!}"><a href="{!!guard_url('blog/tag')!!}">{!! trans('blog::tag.names') !!}</a></li>
                     <li class="pull-right">
                     <span class="actions">

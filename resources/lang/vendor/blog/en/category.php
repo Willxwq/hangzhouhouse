@@ -14,41 +14,41 @@ return [
     /**
      * Singlular and plural name of the module
      */
-    'name'          => 'Category',
-    'names'         => 'Categories',
+    'name'          => '类别',
+    'names'         => '类别',
     
     /**
      * Singlular and plural name of the module
      */
     'title'         => [
-        'main'  => 'Categories',
-        'sub'   => 'Categories',
-        'list'  => 'List of categories',
-        'edit'  => 'Edit category',
-        'create'    => 'Create new category'
+        'main'  => '类别',
+        'sub'   => '类别',
+        'list'  => '类别列表',
+        'edit'  => '编辑类别',
+        'create'    => '创建类别'
     ],
 
     /**
      * Options for select/radio/check.
      */
     'options'       => [
-            'status'              => ['show' => 'show','hide' => 'hide'],
+        'status'           => ['show' => '展示','hide' => '隐藏'],
     ],
 
     /**
      * Placeholder for inputs
      */
     'placeholder'   => [
-        'id'                         => 'Please enter id',
-        'name'                       => 'Please enter category',
-        'slug'                       => 'Please enter slug',
-        'status'                     => 'Please select status',
-        'user_type'                  => 'Please enter user type',
-        'user_id'                    => 'Please enter user id',
-        'upload_folder'              => 'Please enter upload folder',
-        'created_at'                 => 'Please select created at',
-        'updated_at'                 => 'Please select updated at',
-        'deleted_at'                 => 'Please select deleted at',
+        'id'                         => '请输入id',
+        'name'                       => '请输入类别',
+        'slug'                       => '请输入 slug',
+        'status'                     => '请选择状态',
+        'user_type'                  => '请输入用户类型',
+        'user_id'                    => '请输入用户ID',
+        'upload_folder'              => '请输入上传文件夹',
+        'created_at'                 => '请选择创建于',
+        'updated_at'                 => '请选择更新于',
+        'deleted_at'                 => '请选择删除于',
     ],
 
     /**
@@ -58,13 +58,13 @@ return [
         'id'                         => 'Id',
         'name'                       => 'Name',
         'slug'                       => 'Slug',
-        'status'                     => 'Status',
-        'user_type'                  => 'User type',
-        'user_id'                    => 'User id',
-        'upload_folder'              => 'Upload folder',
-        'created_at'                 => 'Created at',
-        'updated_at'                 => 'Updated at',
-        'deleted_at'                 => 'Deleted at',
+        'status'                     => '状态',
+        'user_type'                  => '用户类型',
+        'user_id'                    => '用户类型 id',
+        'upload_folder'              => '上传文件夹',
+        'created_at'                 => '创建于',
+        'updated_at'                 => '更新于',
+        'deleted_at'                 => '删除于',
     ],
 
     /**
@@ -74,22 +74,22 @@ return [
         'id'                         => ['name' => 'Id', 'data-column' => 1, 'checked'],
         'name'                       => ['name' => 'Name', 'data-column' => 2, 'checked'],
         'slug'                       => ['name' => 'Slug', 'data-column' => 3, 'checked'],
-        'status'                     => ['name' => 'Status', 'data-column' => 4, 'checked'],
-        'user_type'                  => ['name' => 'User type', 'data-column' => 5, 'checked'],
-        'created_at'                 => ['name' => 'Created at', 'data-column' => 6, 'checked'],
+        'status'                     => ['name' => '状态', 'data-column' => 4, 'checked'],
+        'user_type'                  => ['name' => '用户类型', 'data-column' => 5, 'checked'],
+        'created_at'                 => ['name' => '创建于', 'data-column' => 6, 'checked'],
     ],
 
     /**
      * Tab labels
      */
     'tab'           => [
-        'name'  => 'Categories',
+        'name'  => '类别',
     ],
 
     /**
      * Texts  for the module
      */
     'text'          => [
-        'preview' => 'Click on the below list for preview',
+        'preview' => '点击下面的列表进行预览',
     ],
 ];

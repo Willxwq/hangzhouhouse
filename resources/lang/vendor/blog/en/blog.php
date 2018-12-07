@@ -14,18 +14,18 @@ return [
     /**
      * Singlular and plural name of the module
      */
-    'name'        => 'Blog',
-    'names'       => 'Blogs',
+    'name'        => '博客',
+    'names'       => '博客',
 
     /**
      * Singlular and plural name of the module
      */
     'title'       => [
-        'main'   => 'Blogs',
-        'sub'    => 'Blogs',
-        'list'   => 'List of blogs',
-        'edit'   => 'Edit blog',
-        'create' => 'Create new blog',
+        'main'   => '博客',
+        'sub'    => '博客',
+        'list'   => '博客列表',
+        'edit'   => '编辑博客',
+        'create' => '创建博客',
     ],
 
     /**
@@ -39,25 +39,25 @@ return [
      * Placeholder for inputs
      */
     'placeholder' => [
-        'id'               => 'Please enter id',
-        'category_id'      => 'Please select category',
-        'title'            => 'Please enter title',
-        'description'      => 'Please enter description',
-        'images'           => 'Please enter images',
-        'tags'             => 'Please enter tags',
-        'viewcount'        => 'Please enter viewcount',
-        'slug'             => 'Please enter slug',
-        'meta_title'       => 'Please enter title',
-        'meta_description' => 'Please enter description',
-        'meta_keyword'     => 'Please enter keyword',
-        'published'        => 'Please select published',
-        'published_at'     => 'Please select published at',
-        'user_type'        => 'Please enter user type',
-        'user_id'          => 'Please enter user id',
-        'upload_folder'    => 'Please enter upload folder',
-        'created_at'       => 'Please select created at',
-        'updated_at'       => 'Please select updated at',
-        'deleted_at'       => 'Please select deleted at',
+        'id'               => '请输入id',
+        'category_id'      => '请选择类别',
+        'title'            => '请输入标题',
+        'description'      => '请输入说明',
+        'images'           => '请输入图片',
+        'tags'             => '请输入标签',
+        'viewcount'        => '请输入 viewcount',
+        'slug'             => '请输入 slug',
+        'meta_title'       => '请输入标题',
+        'meta_description' => '请输入说明',
+        'meta_keyword'     => '请输入关键字',
+        'published'        => '请选择已发布',
+        'published_at'     => '请选择发布于',
+        'user_type'        => '请输入用户类型',
+        'user_id'          => '请输入用户ID',
+        'upload_folder'    => '请输入上传文件夹',
+        'created_at'       => '请选择创建于',
+        'updated_at'       => '请选择更新时间',
+        'deleted_at'       => '请选择已删除',
     ],
 
     /**
@@ -65,24 +65,24 @@ return [
      */
     'label'       => [
         'id'               => 'Id',
-        'category_id'      => 'Category',
-        'title'            => 'Title',
-        'description'      => 'Description',
-        'images'           => 'Images',
-        'tags'             => 'Tags',
-        'viewcount'        => 'Viewcount',
+        'category_id'      => '类别',
+        'title'            => '标题',
+        'description'      => '描述',
+        'images'           => '图片',
+        'tags'             => '标签',
+        'viewcount'        => '查看次数',
         'slug'             => 'Slug',
-        'meta_title'       => 'Meta title',
-        'meta_description' => 'Meta description',
-        'meta_keyword'     => 'Meta keyword',
-        'published'        => 'Published',
-        'published_at'     => 'Published at',
-        'user_type'        => 'User type',
-        'user_id'          => 'User id',
-        'upload_folder'    => 'Upload folder',
-        'created_at'       => 'Created at',
-        'updated_at'       => 'Updated at',
-        'deleted_at'       => 'Deleted at',
+        'meta_title'       => '文章 标题',
+        'meta_description' => '文章 描述',
+        'meta_keyword'     => '文章 关键词',
+        'published'        => '发布时间',
+        'published_at'     => '发表于',
+        'user_type'        => '用户类型',
+        'user_id'          => '用户身份',
+        'upload_folder'    => '上传文件夹',
+        'created_at'       => '创建于',
+        'updated_at'       => '更新于',
+        'deleted_at'       => '删除于',
     ],
 
     /**
@@ -90,26 +90,26 @@ return [
      */
     'cloumns'     => [
         'id'           => ['name' => 'Id', 'data-column' => 1, 'checked'],
-        'category_id'  => ['name' => 'Category id', 'data-column' => 2, 'checked'],
-        'title'        => ['name' => 'Title', 'data-column' => 3, 'checked'],
+        'category_id'  => ['name' => '类别 id', 'data-column' => 2, 'checked'],
+        'title'        => ['name' => '标题', 'data-column' => 3, 'checked'],
         'viewcount'    => ['name' => 'Viewcount', 'data-column' => 4, 'checked'],
-        'published'    => ['name' => 'Published', 'data-column' => 5, 'checked'],
-        'published_at' => ['name' => 'Published at', 'data-column' => 6, 'checked'],
-        'user_type'    => ['name' => 'User type', 'data-column' => 7, 'checked'],
-        'created_at'   => ['name' => 'Created at', 'data-column' => 8, 'checked'],
+        'published'    => ['name' => '发布时间', 'data-column' => 5, 'checked'],
+        'published_at' => ['name' => '发表于', 'data-column' => 6, 'checked'],
+        'user_type'    => ['name' => '用户类型', 'data-column' => 7, 'checked'],
+        'created_at'   => ['name' => '创建于', 'data-column' => 8, 'checked'],
     ],
 
     /**
      * Tab labels
      */
     'tab'         => [
-        'name' => 'Blogs',
+        'name' => '博客',
     ],
 
     /**
      * Texts  for the module
      */
     'text'        => [
-        'preview' => 'Click on the below list for preview',
+        'preview' => '点击下面的列表进行预览',
     ],
 ];

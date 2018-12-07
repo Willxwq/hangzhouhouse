@@ -14,39 +14,39 @@ return [
     /**
      * Singlular and plural name of the module
      */
-    'name'          => 'Tag',
-    'names'         => 'Tags',
+    'name'          => '标签',
+    'names'         => '标签',
     
     /**
      * Singlular and plural name of the module
      */
     'title'         => [
-        'main'  => 'Tags',
-        'sub'   => 'Tags',
-        'list'  => 'List of tags',
-        'edit'  => 'Edit tag',
-        'create'    => 'Create new tag'
+        'main'  => '标签',
+        'sub'   => '标签',
+        'list'  => '标签列表',
+        'edit'  => '编辑标签',
+        'create'    => '创建新标签'
     ],
 
     /**
      * Options for select/radio/check.
      */
     'options'       => [
-            'status'           => ['show' => 'show','hide' => 'hide'],
+            'status'           => ['show' => '展示','hide' => '隐藏'],
     ],
 
     /**
      * Placeholder for inputs
      */
     'placeholder'   => [
-        'id'                         => 'Please enter id',
-        'name'                       => 'Please enter name',
-        'frequency'                  => 'Please enter frequency',
-        'slug'                       => 'Please enter slug',
-        'status'                  => 'Please select status',
-        'created_at'                 => 'Please select created at',
-        'updated_at'                 => 'Please select updated at',
-        'deleted_at'                 => 'Please select deleted at',
+        'id'                         => '请输入 id',
+        'name'                       => '请输入Name',
+        'frequency'                  => '请输入频率',
+        'slug'                       => '请输入 slug',
+        'status'                     => '请选择状态',
+        'created_at'                 => '请选择创建于',
+        'updated_at'                 => '请选择修改于',
+        'deleted_at'                 => '请选择删除于',
     ],
 
     /**
@@ -55,12 +55,12 @@ return [
     'label'         => [
         'id'                         => 'Id',
         'name'                       => 'Name',
-        'frequency'                  => 'Frequency',
+        'frequency'                  => '频率',
         'slug'                       => 'Slug',
-        'status'                  => 'status',
-        'created_at'                 => 'Created at',
-        'updated_at'                 => 'Updated at',
-        'deleted_at'                 => 'Deleted at',
+        'status'                     => '状态',
+        'created_at'                 => '创建于',
+        'updated_at'                 => '编辑于',
+        'deleted_at'                 => '删除于',
     ],
 
     /**
@@ -69,22 +69,22 @@ return [
     'cloumns'         => [
         'id'                         => ['name' => 'Id', 'data-column' => 1, 'checked'],
         'name'                       => ['name' => 'Name', 'data-column' => 2, 'checked'],
-        'frequency'                  => ['name' => 'Frequency', 'data-column' => 3, 'checked'],
-        'status'                  => ['name' => 'Status', 'data-column' => 4, 'checked'],
-        'created_at'                 => ['name' => 'Created at', 'data-column' => 5, 'checked'],
+        'frequency'                  => ['name' => '频率', 'data-column' => 3, 'checked'],
+        'status'                     => ['name' => '状态', 'data-column' => 4, 'checked'],
+        'created_at'                 => ['name' => '创建于', 'data-column' => 5, 'checked'],
     ],
 
     /**
      * Tab labels
      */
     'tab'           => [
-        'name'  => 'Tags',
+        'name'  => '标签',
     ],
 
     /**
      * Texts  for the module
      */
     'text'          => [
-        'preview' => 'Click on the below list for preview',
+        'preview' => '点击下面的列表进行预览',
     ],
 ];
