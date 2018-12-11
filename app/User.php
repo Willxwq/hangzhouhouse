@@ -2,17 +2,29 @@
 
 namespace App;
 
-use Illuminate\Auth\MustVerifyEmail;
-use Illuminate\Contracts\Auth\MustVerifyEmail as ContractMustVerifyEmail;
-use Litepie\User\Models\User as BaseUser;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends BaseUser implements ContractMustVerifyEmail
+class User extends Authenticatable
 {
-    use MustVerifyEmail;
+    use Notifiable;
+
     /**
-     * Configuartion for the model.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $config = 'users.user.model';
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 }

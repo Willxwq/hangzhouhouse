@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => set_route_guard('web')], function () {
-    Route::get('/', function (Request $request) {
-        return $request->user();
-    })->middleware('auth.basic.once');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });
