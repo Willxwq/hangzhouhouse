@@ -6,11 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/hangzhou/css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/menu/meny.css?time=1') }}">
 </head>
 <body>
 <div id="app">
     @include('layouts._header')
-    <div class="meny">
+    <div class="meny" style="width: 260px; height: 100%; position: fixed; display: block; z-index: 1; transform-origin: 100% 50% 0px; transition: all 0.5s ease 0s; transform: translateX(-100%) translateX(6px) scale(1.01) rotateY(-30deg);">
         @include('layouts._menu')
     </div>
     <div class="contents">
@@ -19,6 +21,7 @@
     @include('layouts._footer')
 </div>
 <!-- JS 脚本 -->
+{{--<script type="text/javascript" src="{{ URL::asset('/hangzhou/js/app.js') }}"></script>--}}
 <script type="text/javascript" src="{{ URL::asset('/menu/meny.js') }}"></script>
 </body>
 </html>

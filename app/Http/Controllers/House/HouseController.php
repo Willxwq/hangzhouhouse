@@ -8,17 +8,12 @@
 
 namespace App\Http\Controllers\House;
 
-use App\Http\Controllers\Controller;
-use App\Models\Test;
+use App\Http\Controllers\BaseController;
 
-class HouseController extends Controller
+class HouseController extends BaseController
 {
     public function index()
     {
-        $test = new Test();
-
-        $data = $test->get();
-
-        return view('house.index', ['data' => '$data']);
+        return view('house.index', ['data' => '']);
     }
 }
