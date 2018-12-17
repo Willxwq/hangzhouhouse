@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('house/{house}', 'house\HouseController@index')->name('house.index');
+Route::get('test/{test}', 'house\HouseController@test')->name('house.test');
+Route::get('downcommunity/{index}', 'house\HouseController@downcommunity')->name('downcommunity.index');
