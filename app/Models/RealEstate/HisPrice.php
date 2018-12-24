@@ -17,9 +17,6 @@ class HisPrice extends BaseModel
 
     public function downcommunity()
     {
-        return $this->select(DB::raw('count(*) AS y'), 'district AS x')
-            ->groupBy('district')
-            ->get()
-            ->toArray();
+
     }
 }

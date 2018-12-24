@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xuweiqi
- * Date: 2018/12/8
- * Time: 14:34
- */
-
 namespace App\Http\Controllers\House;
 
 use App\Http\Controllers\BaseController;
@@ -24,6 +17,8 @@ class HouseController extends BaseController
     {
         $community = new Community();
         $sampleChart = new SampleChart();
+
+
         //各个区域小区数量
         $res = $this::conversionData($community->numOfCellsInEachRegion());
 
@@ -62,7 +57,7 @@ class HouseController extends BaseController
 
     public function downcommunity()
     {
-        //$hisPrice = new HisPrice();
+        $hisPrice = new HisPrice();
         //$res = $this::conversionData($hisPrice->downcommunity());
 
         return view('realEstate.test');

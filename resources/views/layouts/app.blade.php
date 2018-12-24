@@ -5,6 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>杭州</title>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/realEstate/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/menu/meny.css?time=1') }}">
@@ -22,8 +24,11 @@
     @include('layouts._footer')
 </div>
 <!-- JS 脚本 -->
+<script type="text/javascript" src="{{ URL::asset('/realEstate/js/app.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/menu/meny.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/realEstate/js/Chart.min.2.7.1.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/realEstate/js/comm.js?1') }}"></script>
+@yield('script')
 </body>
 </html>
 
@@ -57,8 +62,6 @@
     if( Meny.getQuery().u && Meny.getQuery().u.match( /^http/gi ) ) {
         var contents = document.querySelector( '.contents' );
         contents.style.padding = '0px';
-        contents.innerHTML = '<div class="cover"></div><iframe src="'+ Meny.getQuery().u +'" style="width: 100%; height: 100%; border: 0; position: absolute;"></iframe>';
+        contents.innerHTML = '<div class="cover"></div><iframe src="'+ Meny.getQuery().u +'" style="width: 100%; height: 100%; border: 0;       position: absolute;"></iframe>';
     }
 </script>
-
-@yield('script')

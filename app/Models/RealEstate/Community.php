@@ -33,4 +33,10 @@ class Community extends BaseModel
             ->get()
             ->toArray();
     }
+
+    public function getReggetCommunityDetailByBizcircleionList($bizcircle)
+    {
+        return $this->where('bizcircle', '=', $bizcircle)
+            ->get();
+    }
 }
