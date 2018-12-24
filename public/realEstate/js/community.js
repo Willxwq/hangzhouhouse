@@ -7,6 +7,28 @@ $(document).ready(function () {
 });
 
 var region = {
+    _dt: {},
+    bind : function (bizcircle) {
+        region._dt=J.dataTable.bind("example", {
+            "sPaginationType": "input",
+            ajax: {
+                url:'community/getCommunityDetailByBizcircle',
+                data:{ bizcircle: bizcircle }
+            },
+            columns: [
+                {title:'产品代码',data:'id', width:'7%'},
+                // {title:'品牌',data: "",width:'3%',
+                //     render:function(data,type,row,meta) {
+                //         return row.brandNameCn + ' ' + row.brandNameEn;
+                //     }
+                // }
+            ],
+            columnDefs:[{
+
+            }
+            ]
+        });
+    },
     getRegionList : function (type, districtId) {
         J.ajaxFun({
             url:'getRegionList/' + type + '/' + districtId,
