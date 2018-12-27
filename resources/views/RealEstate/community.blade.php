@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('content')
-    <div class="content-wrapper">
+    <div class="">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
@@ -28,15 +28,24 @@
                         </div>
                     </div>
                     <br>
-                    <ul class="nav nav-tabs" id="navtabs">
-                        {{--<li class="nav-item"><a class="nav-link" href="#">上城</a></li>--}}
-                    </ul>
-                    <ul class="nav" id="nav">
-                        {{--<li class="nav-item"><a class="nav-link" href="#">南星</a></li>--}}
-                    </ul>
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs" id="navtabs">
+                            {{--<li class="nav-item"><a class="nav-link" href="#">上城</a></li>--}}
+                        </ul>
+                        <ul class="nav nav-tabs" id="nav">
+                            {{--<li class="nav-item"><a class="nav-link" href="#">南星</a></li>--}}
+                        </ul>
+                    </div>
                     <div id="chart-container">
-                        <canvas id="mycanvas"></canvas>
-
+                        <div class="">
+                            <div class="card">
+                                <div class="card-body">
+                                    {!! $chart->container() !!}
+                                </div>
+                            </div>
+                        </div>
+                        {{--{!! $chart->container(); !!}--}}
+                        {{--<canvas id="mycanvas"></canvas>--}}
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -52,5 +61,19 @@
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ URL::asset('/realEstate/js/community.js?2') }}"></script>
+    {!! $chart->script()  !!}
+
+    <script>
+        $(document).ready(function () {
+            region.getRegionList(1, 0);
+
+            $('#navtabs .nav-link').on('click', function ($this) {
+                region.getRegionList(2, $(this).attr('data-id'));
+            });
+            region.bind('');
+            region.chartOb = window.{{ $chart->id }};
+        });
+
+    </script>
+    <script type="text/javascript" src="{{ URL::asset('/realEstate/js/community.js?4') }}"></script>
 @endsection

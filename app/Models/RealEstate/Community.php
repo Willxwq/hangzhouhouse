@@ -34,9 +34,22 @@ class Community extends BaseModel
             ->toArray();
     }
 
-    public function getReggetCommunityDetailByBizcircleionList($bizcircle)
+    public function getReggetCommunityDetailByBizcircleionList($params)
     {
-        return $this->where('bizcircle', '=', $bizcircle)
-            ->get();
+        $ob = $this->where('bizcircle', '=', $params['bizcircle']);
+        $count = $ob->count();
+
+        if ($count) {
+            $data['total'] = $count;
+            $data['curPage'] = $params['start'];
+            $data['pageSize'] = $params['length'];
+            $data['totalPage'] = ceil($count / $params['length']);
+        }
+        $data['rows'] = $ob
+            ->offset($params['start'])
+            ->limit($params['length'])
+            ->get()
+            ->toArray();
+        return $data;
     }
 }

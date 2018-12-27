@@ -122,8 +122,8 @@ var J = {
                     if (args.sPaginationType) option['sPaginationType'] = args.sPaginationType
                 }
                 var surl = ajaxParam.url.split('/')// 重写URL
-                ajaxParam.url = '/' + surl[0] + '/' + surl[1];
-                option['ajax'] = ajaxParam;
+                ajaxParam.url = '/' + surl[0] + '/ajax/' + surl[1];
+                option['ajax'] = ajaxParam
                 if (opts) {
                     for (var optName in opts) {
                         option[optName] = opts[optName]
@@ -133,7 +133,6 @@ var J = {
                 if( args.xhrCb && typeof  args.xhrCb === 'function') {
                     this.dt = $('#' + tabName).on('xhr.dt', args.xhrCb).DataTable(option)
                 }else {
-                    console.log($('#' + tabName));
                     this.dt = $('#' + tabName).DataTable(option)
                 }
                 return this.dt

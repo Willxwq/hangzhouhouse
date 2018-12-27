@@ -1,13 +1,8 @@
-$(document).ready(function () {
-    region.getRegionList(1, 0);
-
-    $('#navtabs .nav-link').on('click', function ($this) {
-        region.getRegionList(2, $(this).attr('data-id'));
-    });
-});
-
 var region = {
     _dt: {},
+    chartOb: {},
+    _labels: [],
+    _price: [],
     bind : function (bizcircle) {
         region._dt=J.dataTable.bind("example", {
             "sPaginationType": "input",
@@ -16,18 +11,41 @@ var region = {
                 data:{ bizcircle: bizcircle }
             },
             columns: [
-                {title:'产品代码',data:'id', width:'7%'},
-                // {title:'品牌',data: "",width:'3%',
-                //     render:function(data,type,row,meta) {
-                //         return row.brandNameCn + ' ' + row.brandNameEn;
-                //     }
-                // }
-            ],
-            columnDefs:[{
+                {title:'小区名',data:'title', width:'5%',
+                    render: function (data, type, row, meta) {
+                        if (row.title.length > 6) {
+                            region._labels.push(row.title.substring(0,5)+"...");
+                        } else {
+                            region._labels.push(row.title);
+                        }
+                        return '<td>' + row.title + '</td>';
+                    }
+                },
+                {title:'价格',data:'price', width:'4%',
+                    render: function (data, type, row, meta) {
+                        row.price === '暂无'? price = 0 : price = row.price;
+                        region._price.push(price);
+                        return '<td>' + row.price + '</td>';
+                    }
+                },
+                {title:'地铁',data:'tagList', width:'12%'},
+                {title:'在售数量',data:'onsale', width:'3%'},
+                {title:'在租数量',data:'onrent', width:'3%'},
+                {title:'物业费',data:'cost', width:'3%'},
+            ]},
+            {
 
-            }
-            ]
-        });
+                drawCallback: function() {
+                    region.chartOb.data.labels = region._labels
+                    console.log(region.chartOb.data.labels)
+                    region.chartOb.chart.data.datasets.forEach((dataset) => {
+                        dataset.data = region._price;
+                        region._price = [];
+                    })
+                    region.chartOb.update()
+                    region._labels = []
+                }
+            });
     },
     getRegionList : function (type, districtId) {
         J.ajaxFun({
@@ -55,7 +73,6 @@ var region = {
         $html = '';
         $.each(data, function (i, n) {
             $html += '<li class="nav-item"><a class="nav-link" href="#">'+ n.bizcircle +'</a></li>';
-            // $html += '<li class="nav-item"><a class="nav-link" href="?bizcircle='+ n.bizcircle + '">'+ n.bizcircle +'</a></li>';
         });
         $('#nav').append($html);
 
@@ -64,6 +81,10 @@ var region = {
         });
     },
     getCommunityDetailByBizcircle : function (bizcircle) {
-        var datatable = region.bind(bizcircle);
+        region.chartOb.data.labels = [];
+        region.chartOb.chart.data.datasets.forEach((dataset) => {
+            dataset.data = [];
+        });
+        J.dataTable.reload({bizcircle:bizcircle});
     }
 }

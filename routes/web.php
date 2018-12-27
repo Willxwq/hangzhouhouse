@@ -22,6 +22,6 @@ Route::get('downcommunity/{index}', 'house\HouseController@downcommunity')->name
 Route::group(['prefix' => 'community', 'namespace' => 'RealEstate'], function () {
     Route::get('{index}', 'CommunityController@index')->name('community.index');
     Route::get('getRegionList/{type}/{districtId}', 'CommunityController@getRegionList')->name('community.getRegionList');
-    Route::get('getCommunityDetailByBizcircle/{bizcircle}', 'CommunityController@getCommunityDetailByBizcircle')
+    Route::get('ajax/getCommunityDetailByBizcircle', 'CommunityController@getCommunityDetailByBizcircle')
         ->name('community.getCommunityDetailByBizcircle');
 });

@@ -40,4 +40,8 @@
     {!! $chart->script()  !!}
     {!! $chart2->script() !!}
 
+    <script>
+        console.log(window.{{ $chart->id }});
+    </script>
+
 @endsection

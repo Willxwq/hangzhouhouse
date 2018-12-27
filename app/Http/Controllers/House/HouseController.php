@@ -20,7 +20,7 @@ class HouseController extends BaseController
 
 
         //各个区域小区数量
-        $res = $this::conversionData($community->numOfCellsInEachRegion());
+        $res = $this::conversionData2($community->numOfCellsInEachRegion());
 
         $sampleChart->labels($res['x'])
             ->dataset('各区小区数量', 'line', $res['y'])->options([
@@ -32,7 +32,7 @@ class HouseController extends BaseController
 
         $sampleChart2 = new SampleChart();
 
-        $res2 = $this::conversionData($community->averagePriceRankingOfEachRegion());
+        $res2 = $this::conversionData2($community->averagePriceRankingOfEachRegion());
 
         $sampleChart2->labels($res2['x'])
             ->dataset('各区小区数量', 'bar', $res2['y'])->options([
@@ -47,7 +47,7 @@ class HouseController extends BaseController
         ]);
     }
 
-    public static function conversionData($data)
+    public static function conversionData2($data)
     {
         $res['x'] = array_column($data, 'x');
         $res['y'] = array_column($data, 'y');
@@ -58,7 +58,7 @@ class HouseController extends BaseController
     public function downcommunity()
     {
         $hisPrice = new HisPrice();
-        //$res = $this::conversionData($hisPrice->downcommunity());
+        //$res = $this::conversionData2($hisPrice->downcommunity());
 
         return view('realEstate.test');
     }

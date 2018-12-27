@@ -10,9 +10,17 @@
     <title>杭州</title>
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/realEstate/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/menu/meny.css?time=1') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/realEstate/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/realEstate/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/realEstate/css/admin.min.css') }}">
     @yield('css')
 </head>
 <body>
+<style>
+    body {
+        background-color : #eaf0f4;
+    }
+</style>
 <div id="app">
     @include('layouts._header')
     <div class="meny" style="width: 260px; height: 100%; position: fixed; display: block; z-index: 1; transform-origin: 100% 50% 0px; transition: all 0.5s ease 0s; transform: translateX(-100%) translateX(6px) scale(1.01) rotateY(-30deg);">
@@ -25,9 +33,11 @@
 </div>
 <!-- JS 脚本 -->
 <script type="text/javascript" src="{{ URL::asset('/realEstate/js/app.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/realEstate/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/realEstate/js/jquery.dataTables.bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/menu/meny.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/realEstate/js/Chart.min.2.7.1.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('/realEstate/js/comm.js?1') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/realEstate/js/comm.js?4') }}"></script>
 @yield('script')
 </body>
 </html>
