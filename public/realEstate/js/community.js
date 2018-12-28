@@ -18,7 +18,7 @@ var region = {
                         } else {
                             region._labels.push(row.title);
                         }
-                        return '<td>' + row.title + '</td>';
+                        return '<td><a href="/community/communityDetail/'+ row.title +'">' + row.title + '</a></td>';
                     }
                 },
                 {title:'价格',data:'price', width:'4%',
@@ -29,23 +29,32 @@ var region = {
                     }
                 },
                 {title:'地铁',data:'tagList', width:'12%'},
+                {title:'建成',data:'year', width:'5%'},
                 {title:'在售数量',data:'onsale', width:'3%'},
                 {title:'在租数量',data:'onrent', width:'3%'},
                 {title:'物业费',data:'cost', width:'3%'},
             ]},
             {
-
                 drawCallback: function() {
-                    region.chartOb.data.labels = region._labels
-                    console.log(region.chartOb.data.labels)
-                    region.chartOb.chart.data.datasets.forEach((dataset) => {
-                        dataset.data = region._price;
-                        region._price = [];
-                    })
-                    region.chartOb.update()
-                    region._labels = []
+                    region.resetChar()
+                    region.updateChar()
                 }
             });
+    },
+    resetChar : function () {
+        region.chartOb.data.labels = [];
+        region.chartOb.chart.data.datasets.forEach((dataset) => {
+            dataset.data = [];
+        });
+    },
+    updateChar : function () {
+        region.chartOb.data.labels = region._labels;
+        region.chartOb.chart.data.datasets.forEach((dataset) => {
+            dataset.data = region._price;
+        region._price = [];
+        });
+        region._labels = [];
+        region.chartOb.update();
     },
     getRegionList : function (type, districtId) {
         J.ajaxFun({
@@ -81,10 +90,6 @@ var region = {
         });
     },
     getCommunityDetailByBizcircle : function (bizcircle) {
-        region.chartOb.data.labels = [];
-        region.chartOb.chart.data.datasets.forEach((dataset) => {
-            dataset.data = [];
-        });
         J.dataTable.reload({bizcircle:bizcircle});
     }
 }

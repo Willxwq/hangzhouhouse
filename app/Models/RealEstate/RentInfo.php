@@ -16,4 +16,11 @@ class RentInfo extends BaseModel
             ->limit(5)
             ->get()->toArray();
     }
+
+    public function getRentInfoByCommunity($communityName)
+    {
+        return $this->where('region', '=', $communityName)
+            ->get()
+            ->toArray();
+    }
 }

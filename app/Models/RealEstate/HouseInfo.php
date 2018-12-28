@@ -16,4 +16,11 @@ class HouseInfo extends BaseModel
             ->limit(5)
             ->get()->toArray();
     }
+
+    public function getHouseInfoByCommunity($communityName)
+    {
+        return $this->where('community', '=', $communityName)
+            ->get()
+            ->toArray();
+    }
 }

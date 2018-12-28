@@ -52,4 +52,11 @@ class Community extends BaseModel
             ->toArray();
         return $data;
     }
+
+    public function getCommunityDetail($communityName)
+    {
+        return $this->where('title', '=', $communityName)
+            ->first()
+            ->toArray();
+    }
 }

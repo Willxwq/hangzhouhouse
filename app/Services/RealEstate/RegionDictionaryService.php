@@ -2,27 +2,19 @@
 
 namespace App\Services\RealEstate;
 
-use App\Models\RealEstate\Community;
+use App\Models\RealEstate\HouseInfo;
 use App\Models\RealEstate\RegionDictionary;
+use App\Services\BaseServices;
 
-class RegionDictionaryService
+class RegionDictionaryService extends BaseServices
 {
     public static function getRegionList($type, $districtId)
     {
-        $regionDictionary = new RegionDictionary();
-
-        return $regionDictionary->getRegionList($type, $districtId);
+        return (new RegionDictionary)->getRegionList($type, $districtId);
     }
 
-    public static function getCommunityDetailByBizcircle($params)
+    public static function getHouseTypeByCommunity($communityName)
     {
-        $community = new Community();
-
-        return $community->getReggetCommunityDetailByBizcircleionList($params);
-    }
-
-    public static function getCommunListChart()
-    {
-
+        return (new HouseInfo())->getHouseInfoByCommunity($communityName);
     }
 }
