@@ -10,7 +10,7 @@ class RegionDictionaryService extends BaseServices
 {
     public static function getRegionList($type, $districtId)
     {
-        return (new RegionDictionary)->getRegionList($type, $districtId);
+        return (new RegionDictionary())->getRegionList($type, $districtId);
     }
 
     public static function getHouseTypeByCommunity($communityName)

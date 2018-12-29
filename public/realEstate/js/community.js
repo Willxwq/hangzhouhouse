@@ -58,7 +58,7 @@ var region = {
     },
     getRegionList : function (type, districtId) {
         J.ajaxFun({
-            url:'getRegionList/' + type + '/' + districtId,
+            url:'community/getRegionList/' + type + '/' + districtId,
             data:{},
             type:'get',
             call:function(o){

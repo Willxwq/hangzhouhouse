@@ -2,6 +2,7 @@
 
 namespace App\Services\RealEstate;
 
+use App\Charts\SampleChart;
 use App\Models\RealEstate\Community;
 use App\Services\BaseServices;
 

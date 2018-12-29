@@ -8,6 +8,7 @@ use App\Services\RealEstate\CommunityService;
 use App\Services\RealEstate\HouseInfoService;
 use App\Services\RealEstate\RegionDictionaryService;
 use App\Services\RealEstate\RentInfoService;
+use App\Services\RealEstate\SellInfoService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Charts\SampleChart;
@@ -39,15 +40,19 @@ class CommunityController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function communityDetail($communityName, CommunityService $communityService,
-                                    HouseInfoService $houseInfoService, RentInfoService $rentInfoService)
+                                    HouseInfoService $houseInfoService, RentInfoService $rentInfoService,
+                                    SellInfoService $sellInfoService)
     {
         $result = $communityService::getCommunityDetail($communityName);
         $houseInfo = $houseInfoService::communityDetail($communityName);
         $rentInfo = $rentInfoService::communityDetail($communityName);
+        $sellInfo = $sellInfoService::communityDetail($communityName);
 
         $data = $houseInfo;
         $data['communityInfo'] = $result;
         $data['rentInfo'] = $rentInfo['rentInfo'];
+        $data['transactions'] = $sellInfo['transactions'];
+        $data['historicalAvgPrice'] = $sellInfo['historicalAvgPrice'];
 
         return view('realestate.communityDetail', ['data' => $data]);
     }

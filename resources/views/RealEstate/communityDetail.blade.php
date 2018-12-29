@@ -88,6 +88,7 @@
                                 <div class="pull-right" id="sell-button"></div>
                             </div>
                             <div class="card-body" id="chart-unitprice">
+                                {!! $data['historicalAvgPrice']->container(); !!}
                             </div>
                         </div>
                     </div>
@@ -110,6 +111,7 @@
                                 <div class="pull-right" id="count-button"></div>
                             </div>
                             <div class="card-body" id="chart-count">
+                                {!! $data['transactions']->container(); !!}
                             </div>
                         </div>
                     </div>
@@ -339,5 +341,7 @@
     {!! $data['houseType']->script()  !!}
     {!! $data['rentInfo']->script()  !!}
     {!! $data['onSalePrice']->script()  !!}
+    {!! $data['transactions']->script()  !!}
+    {!! $data['historicalAvgPrice']->script()  !!}
 
 @endsection
