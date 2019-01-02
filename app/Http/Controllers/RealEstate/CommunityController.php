@@ -29,7 +29,7 @@ class CommunityController extends BaseController
                 'hitRadius' => 20,
             ]);
 
-        return view('realestate.community', ['chart' => $sampleChart]);
+        return view('RealEstate.community', ['chart' => $sampleChart]);
     }
 
     /**
@@ -54,7 +54,7 @@ class CommunityController extends BaseController
         $data['transactions'] = $sellInfo['transactions'];
         $data['historicalAvgPrice'] = $sellInfo['historicalAvgPrice'];
 
-        return view('realestate.communityDetail', ['data' => $data]);
+        return view('RealEstate.communityDetail', ['data' => $data]);
     }
 
     /**

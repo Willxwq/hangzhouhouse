@@ -17,7 +17,7 @@ class SellInfoService  extends BaseServices
      * 存放图表颜色
      * @var array
      */
-    private static $color = ['#3390dc', '#37c171', '#6cb2eb', '#ffed4a', '#e3342f', '#6c757c'];
+    private static $color = ['#3390dc', '#37c171', '#6cb2eb', '#ffed4a', '#e3342f', '#6c757c', '#fa84ae', '#8ad293', '#c092c6'];
 
     /**
      * 获取小区详细

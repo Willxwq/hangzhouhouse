@@ -37,7 +37,7 @@
 <script type="text/javascript" src="{{ URL::asset('/realEstate/js/jquery.dataTables.bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/menu/meny.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('/realEstate/js/Chart.min.2.7.1.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('/realEstate/js/comm.js?4') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('/realEstate/js/comm.js?5') }}"></script>
 @yield('script')
 </body>
 </html>
