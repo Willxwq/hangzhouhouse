@@ -18,6 +18,7 @@ class HouseInfoService extends BaseServices
      * @var array
      */
     private static $color = ['#3390dc', '#37c171', '#6cb2eb', '#ffed4a', '#e3342f', '#6c757c', '#fa84ae', '#8ad293', '#c092c6'];
+    private static $decoration = [' 毛坯 ', ' 简装 ', ' 精装 ', ' 其他 '];
 
     /**
      * 获取小区详细
@@ -66,24 +67,45 @@ class HouseInfoService extends BaseServices
         $sampleChart = new SampleChart();
 
         $data = [];
+        $labels = [];
         foreach (self::$houseInfo as $value) {
             if (isset($data[$value['housetype']])) {
-                $data[$value['housetype']]['unitPrice'] += $value['unitPrice'];
-                $data[$value['housetype']]['num'] += 1;
+                $data[$value['decoration']][$value['housetype']]['unitPrice'] += $value['unitPrice'];
+                $data[$value['decoration']][$value['housetype']]['num'] += 1;
             } else {
-                $data[$value['housetype']]['unitPrice'] = $value['unitPrice'];
-                $data[$value['housetype']]['num'] = 0;
+                $data[$value['decoration']][$value['housetype']]['unitPrice'] = $value['unitPrice'];
+                $data[$value['decoration']][$value['housetype']]['num'] = 0;
             }
-            $data[$value['housetype']]['num'] += 1;
+            $data[$value['decoration']][$value['housetype']]['num'] += 1;
         }
         foreach ($data as $dateK => $dateV) {
-            $data[$dateK] = intval($dateV['unitPrice'] / $dateV['num']);
+            foreach ($dateV as $itemK =>  $itemV) {
+                $data[$dateK][$itemK] = intval($itemV['unitPrice'] / $itemV['num']);
+                $labels[] = $itemK;
+            }
         }
 
-        $sampleChart->labels(array_keys($data))
-            ->dataset('在售价格信息', 'bar', array_values($data))
+        self::elog(array_sort(array_unique($labels)));
+
+        $sampleChart->labels(sort(array_unique($labels)))
+            ->dataset(self::$decoration[0], 'bar', array_values($data[self::$decoration[0]]))
             ->options([
-                'backgroundColor' => self::$color,
+                'backgroundColor' => self::$color[0],
+            ]);
+        $sampleChart
+            ->dataset(self::$decoration[1], 'bar', array_values($data[self::$decoration[1]]))
+            ->options([
+                'backgroundColor' => self::$color[1],
+            ]);
+        $sampleChart
+            ->dataset(self::$decoration[2], 'bar', array_values($data[self::$decoration[2]]))
+            ->options([
+                'backgroundColor' => self::$color[2],
+            ]);
+        $sampleChart
+            ->dataset(self::$decoration[3], 'bar', array_values($data[self::$decoration[3]]))
+            ->options([
+                'backgroundColor' => self::$color[3],
             ]);
 
         return $sampleChart;

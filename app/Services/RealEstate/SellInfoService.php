@@ -63,7 +63,7 @@ class SellInfoService  extends BaseServices
     }
 
     /**
-     * 创建 历史成交套数图表
+     * 创建 历史成交均价
      * @return SampleChart
      */
     private static function createHistoricalAvgPriceChart()
