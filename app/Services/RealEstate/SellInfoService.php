@@ -43,6 +43,11 @@ class SellInfoService  extends BaseServices
         return $result;
     }
 
+    public static function getSellUpsAndDowns()
+    {
+        return self::$sellInfo = (new SellInfo())->getSellUpsAndDowns();
+    }
+
     /**
      * 创建 历史成交套数图表
      * @return SampleChart

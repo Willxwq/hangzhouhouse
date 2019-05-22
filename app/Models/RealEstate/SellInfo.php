@@ -28,4 +28,17 @@ class SellInfo extends BaseModel
             ->get()
             ->toArray();
     }
+
+    public function getSellUpsAndDowns()
+    {
+        return DB::table('sellinfo as s')
+            ->select(DB::raw("s.houseID,s.totalPrice AS salePrice, h.totalPrice, (s.totalPrice - h.totalPrice) AS ups_or_downs, s.link, s.dealdate"))
+            ->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
+            ->whereBetween('s.dealdate', ["2019-02-30", "2019-03-30"])
+            ->orderBy('ups_or_downs')
+            ->offset(0)
+            ->limit(10)
+            ->get()
+            ->toArray();
+    }
 }

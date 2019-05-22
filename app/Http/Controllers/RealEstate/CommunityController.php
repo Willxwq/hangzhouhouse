@@ -43,6 +43,8 @@ class CommunityController extends BaseController
                                     HouseInfoService $houseInfoService, RentInfoService $rentInfoService,
                                     SellInfoService $sellInfoService)
     {
+        //$test = $sellInfoService::getSellUpsAndDowns();
+        //self::elog($test);
         $result = $communityService::getCommunityDetail($communityName);
         $houseInfo = $houseInfoService::communityDetail($communityName);
         $rentInfo = $rentInfoService::communityDetail($communityName);

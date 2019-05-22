@@ -85,29 +85,36 @@ class HouseInfoService extends BaseServices
             }
         }
 
-        self::elog(array_sort(array_unique($labels)));
+        $sampleChart->labels(array_values(array_unique($labels)));
 
-        $sampleChart->labels(sort(array_unique($labels)))
-            ->dataset(self::$decoration[0], 'bar', array_values($data[self::$decoration[0]]))
-            ->options([
-                'backgroundColor' => self::$color[0],
-            ]);
-        $sampleChart
-            ->dataset(self::$decoration[1], 'bar', array_values($data[self::$decoration[1]]))
-            ->options([
-                'backgroundColor' => self::$color[1],
-            ]);
-        $sampleChart
-            ->dataset(self::$decoration[2], 'bar', array_values($data[self::$decoration[2]]))
-            ->options([
-                'backgroundColor' => self::$color[2],
-            ]);
-        $sampleChart
-            ->dataset(self::$decoration[3], 'bar', array_values($data[self::$decoration[3]]))
-            ->options([
-                'backgroundColor' => self::$color[3],
-            ]);
-
+        if (!empty($data[self::$decoration[0]])) {
+            $sampleChart
+                ->dataset(self::$decoration[0], 'bar', array_values($data[self::$decoration[0]]))
+                ->options([
+                    'backgroundColor' => self::$color[0],
+                ]);
+        }
+        if (!empty($data[self::$decoration[1]])) {
+            $sampleChart
+                ->dataset(self::$decoration[1], 'bar', array_values($data[self::$decoration[1]]))
+                ->options([
+                    'backgroundColor' => self::$color[1],
+                ]);
+        }
+        if (!empty($data[self::$decoration[2]])) {
+            $sampleChart
+                ->dataset(self::$decoration[2], 'bar', array_values($data[self::$decoration[2]]))
+                ->options([
+                    'backgroundColor' => self::$color[2],
+                ]);
+        }
+        if (!empty($data[self::$decoration[3]])) {
+            $sampleChart
+                ->dataset(self::$decoration[3], 'bar', array_values($data[self::$decoration[3]]))
+                ->options([
+                    'backgroundColor' => self::$color[3],
+                ]);
+        }
         return $sampleChart;
     }
 }
