@@ -36,7 +36,7 @@
                             {{--<li class="nav-item"><a class="nav-link" href="#">南星</a></li>--}}
                         </ul>
                     </div>
-                    <div id="chart-container">
+                    <div id="chart-container" style="height: 450px;">
                         <div class="">
                             <div class="card">
                                 <div class="card-body">
