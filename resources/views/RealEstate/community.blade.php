@@ -36,10 +36,10 @@
                             {{--<li class="nav-item"><a class="nav-link" href="#">南星</a></li>--}}
                         </ul>
                     </div>
-                    <div id="chart-container" style="height: 450px;">
+                    <div id="chart-container">
                         <div class="">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body" style="height: 430px;">
                                     {!! $chart->container() !!}
                                 </div>
                             </div>
