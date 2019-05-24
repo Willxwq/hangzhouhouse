@@ -28,6 +28,7 @@ class SellController extends BaseController
             'start' => $param['start'],
             'length' => $param['length'],
             'time' => is_numeric($param['time']) ? $param['time'] : 1,
+            'showType' => is_numeric($param['showType']) ? $param['showType'] : 1,
             'type' => is_numeric($param['type']) ? $param['type'] : 1
         ];
         $list = $sellInfoService::getSellUpsAndDowns($params);

@@ -15,6 +15,10 @@
                                 <option value="3">最近3个月</option>
                                 <option value="6">半年</option>
                             </select>
+                            <select class="form-control" name="" id="showType">
+                                <option value="1">百分百</option>
+                                <option value="2">数值</option>
+                            </select>
                         </div>
                     </div>
                     <br>
@@ -37,7 +41,10 @@
             region.bind('');
 
             $('#time').change(function(){
-                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a");
+                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val());
+            });
+            $('#showType').change(function(){
+                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val());
             });
         });
 

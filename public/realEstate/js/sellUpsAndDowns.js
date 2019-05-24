@@ -6,14 +6,15 @@ var region = {
     _time: '',
     _type: '',
     _color: '#00a65a',
+    _showType: 1,
     bind : function () {
         region._dt=J.dataTable.bind("example", {
             "sPaginationType": "input",
             ajax: {
                 url:'sell/getSellUpsAndDowns',
-                data:{ time: this._time, type: this._type }
+                data:{ time: this._time, type: this._type, showType: this._showType }
             },
-            pageLength: 100,
+            pageLength: 10,
             columns: [
                 {title:'标题',data:'title', width:'5%',
                     render: function (data, type, row, meta) {
@@ -21,10 +22,14 @@ var region = {
                         return '<td><a target="_blank" href="'+ row.link +'">' + row.title + '</a></td>';
                     }
                 },
-                {title:'<button onclick="region.getSellUpsAndDowns(region._time, 1, \'#00a65a\')" class="btn btn-success">跌幅</button>' +
-                    '<button onclick="region.getSellUpsAndDowns(region._time, 2, \'#d73925\')" class="btn btn-danger">涨幅</button>',data:'ups_or_downs', width:'4%',
+                {title:'<button onclick="region.getSellUpsAndDowns(region._time, 1, \'#00a65a\', region._showType)" class="btn btn-success">跌幅</button>' +
+                    '<button onclick="region.getSellUpsAndDowns(region._time, 2, \'#d73925\', region._showType)" class="btn btn-danger">涨幅</button>',data:'ups_or_downs', width:'4%',
                     render: function (data, type, row, meta) {
-                        return '<td><a style="color: '+ region._color +'; font-size: 20px;">' + row.ups_or_downs + '%</a></td>';
+                        if (region._showType === "1") {
+                            return '<td><a style="color: '+ region._color +'; font-size: 20px;">' + row.ups_or_downs + '%</a></td>';
+                        } else {
+                            return '<td><a style="color: '+ region._color +'; font-size: 20px;">' + row.ups_or_downs + '</a></td>';
+                        }
                     }
                 },
                 {title:'挂牌价格/成交价格',data:'totalPrice', width:'4%',
@@ -52,10 +57,11 @@ var region = {
         );
         // J.dataTable.Columns["跌幅"].ColumnName="增幅";
     },
-    getSellUpsAndDowns : function (time, type, color) {
+    getSellUpsAndDowns : function (time, type, color, showType) {
+        region._showType = showType;
         region._color = color;
         region._time = time;
         region._type = type;
-        J.dataTable.reload({time:time, type:type});
+        J.dataTable.reload({time:time, type:type, showType:showType});
     }
 }

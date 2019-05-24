@@ -37,14 +37,25 @@ class SellInfo extends BaseModel
     public function getSellUpsAndDowns($params)
     {
         $startTime = date('Y-m-d',strtotime('-'. $params['time'] .' month'));
-        if ($params['type'] == 1) {
-            $num = "s.totalPrice / h.totalPrice";
+        if ($params['showType'] == 1) {
+            if ($params['type'] == 1) {
+                $num = "s.totalPrice / h.totalPrice";
+            } else {
+                $num = "h.totalPrice / s.totalPrice";
+            }
+            $select = "TRUNCATE((1 - ". $num .") * 100, 2)";
+            $num = "(1 - ". $num .")";
         } else {
-            $num = "h.totalPrice / s.totalPrice";
+            if ($params['type'] == 1) {
+                $num = "h.totalPrice - s.totalPrice";
+            } else {
+                $num = "s.totalPrice - h.totalPrice";
+            }
+            $select = $num;
         }
 
         $ob = DB::table('sellinfo as s')
-            ->select(DB::raw("TRUNCATE((1 - ". $num .") * 100, 2) AS ups_or_downs"))
+            ->select(DB::raw($select ." AS ups_or_downs"))
             ->addSelect("s.title","s.totalPrice AS salePrice", "h.totalPrice", "s.link", "s.dealdate",
                                 "h.unitPrice", "h.validdate", "c.his")
             ->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
@@ -52,7 +63,7 @@ class SellInfo extends BaseModel
                                     AS c"),'c.houseID','=','s.houseID')
             ->where('s.dealdate', '>=', $startTime)
             ->where('s.dealdate', '<=', date('Y-m-d', time()))
-            ->whereRaw("(1 - ". $num .") > 0")
+            ->whereRaw($num ." > 0")
             ->whereRaw('(s.totalPrice - h.totalPrice) IS NOT NULL')
             ->orderBy('ups_or_downs', 'desc');
 
