@@ -311,8 +311,8 @@
         .hand_right_middle_new {
             width: 143px;
             height: 11px;
-            top: 500px;
-            left: 309px;
+            top: 520px;
+            left: 349px;
             border-radius: 100% 100% 15% 17%/ 99% 92% 90% 90%;
             background-color: #d73925;
             z-index: 99;
@@ -321,8 +321,8 @@
         .hand_right_middle_new_left {
             width: 50px;
             height: 11px;
-            top: 525px;
-            left: 420px;
+            top: 544px;
+            left: 460px;
             border-radius: 100% 100% 15% 17%/ 99% 92% 90% 90%;
             background-color: #d73925;
             z-index: 99;
@@ -331,8 +331,8 @@
         .hand_right_middle_new_right {
             width: 50px;
             height: 11px;
-            top: 580px;
-            left: 433px;
+            top: 598px;
+            left: 473px;
             border-radius: 100% 100% 15% 17%/ 99% 92% 90% 90%;
             background-color: #d73925;
             z-index: 99;
@@ -342,7 +342,7 @@
             width: 500px;
             height: 11px;
             top: 550px;
-            left: 433px;
+            left: 483px;
             border-radius: 100% 100% 15% 17%/ 99% 92% 90% 90%;
             z-index: 99;
             transform: rotate(0deg);
@@ -382,7 +382,7 @@
             top: 553px;
             left: 138px;
             border-radius: 58% 187% 180% 50%/ 130% 123% 113% 100%;
-            background-color: #000;
+            background-color: #00a65a;
             z-index: 99;
             transform: rotate(0deg);
         }
