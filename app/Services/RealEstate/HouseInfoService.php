@@ -18,7 +18,7 @@ class HouseInfoService extends BaseServices
      * @var array
      */
     private static $color = ['#3390dc', '#37c171', '#6cb2eb', '#ffed4a', '#e3342f', '#6c757c', '#fa84ae', '#8ad293', '#c092c6'];
-    private static $decoration = [' 毛坯 ', ' 简装 ', ' 精装 ', ' 其他 '];
+    private static $decoration = ['毛坯', '简装', '精装', '其他'];
 
     /**
      * 获取小区详细
@@ -69,14 +69,15 @@ class HouseInfoService extends BaseServices
         $data = [];
         $labels = [];
         foreach (self::$houseInfo as $value) {
+            $decoration = trim($value['decoration']);
             if (isset($data[$value['housetype']])) {
-                $data[$value['decoration']][$value['housetype']]['unitPrice'] += $value['unitPrice'];
-                $data[$value['decoration']][$value['housetype']]['num'] += 1;
+                $data[$decoration][$value['housetype']]['unitPrice'] += $value['unitPrice'];
+                $data[$decoration][$value['housetype']]['num'] += 1;
             } else {
-                $data[$value['decoration']][$value['housetype']]['unitPrice'] = $value['unitPrice'];
-                $data[$value['decoration']][$value['housetype']]['num'] = 0;
+                $data[$decoration][$value['housetype']]['unitPrice'] = $value['unitPrice'];
+                $data[$decoration][$value['housetype']]['num'] = 0;
             }
-            $data[$value['decoration']][$value['housetype']]['num'] += 1;
+            $data[$decoration][$value['housetype']]['num'] += 1;
         }
         foreach ($data as $dateK => $dateV) {
             foreach ($dateV as $itemK =>  $itemV) {
@@ -87,28 +88,28 @@ class HouseInfoService extends BaseServices
 
         $sampleChart->labels(array_values(array_unique($labels)));
 
-        if (!empty($data[self::$decoration[0]])) {
+        if (!empty($data[trim(self::$decoration[0])])) {
             $sampleChart
                 ->dataset(self::$decoration[0], 'bar', array_values($data[self::$decoration[0]]))
                 ->options([
                     'backgroundColor' => self::$color[0],
                 ]);
         }
-        if (!empty($data[self::$decoration[1]])) {
+        if (!empty($data[trim(self::$decoration[1])])) {
             $sampleChart
                 ->dataset(self::$decoration[1], 'bar', array_values($data[self::$decoration[1]]))
                 ->options([
                     'backgroundColor' => self::$color[1],
                 ]);
         }
-        if (!empty($data[self::$decoration[2]])) {
+        if (!empty($data[trim(self::$decoration[2])])) {
             $sampleChart
                 ->dataset(self::$decoration[2], 'bar', array_values($data[self::$decoration[2]]))
                 ->options([
                     'backgroundColor' => self::$color[2],
                 ]);
         }
-        if (!empty($data[self::$decoration[3]])) {
+        if (!empty($data[trim(self::$decoration[3])])) {
             $sampleChart
                 ->dataset(self::$decoration[3], 'bar', array_values($data[self::$decoration[3]]))
                 ->options([

@@ -26,3 +26,8 @@ Route::group(['prefix' => 'community', 'namespace' => 'RealEstate'], function ()
     Route::get('ajax/getCommunityDetailByBizcircle', 'CommunityController@getCommunityDetailByBizcircle')
         ->name('community.getCommunityDetailByBizcircle');
 });
+Route::group(['prefix' => 'sell', 'namespace' => 'RealEstate'], function () {
+    Route::get('sellUpsAndDowns', 'SellController@sellUpsAndDownsIndex')->name('sell.sellUpsAndDownsIndex');
+    Route::get('ajax/getSellUpsAndDowns', 'SellController@getSellUpsAndDowns')
+        ->name('sell.getSellUpsAndDowns');
+});

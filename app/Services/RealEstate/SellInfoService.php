@@ -43,9 +43,9 @@ class SellInfoService  extends BaseServices
         return $result;
     }
 
-    public static function getSellUpsAndDowns()
+    public static function getSellUpsAndDowns($params)
     {
-        return self::$sellInfo = (new SellInfo())->getSellUpsAndDowns();
+        return self::$sellInfo = (new SellInfo())->getSellUpsAndDowns($params);
     }
 
     /**

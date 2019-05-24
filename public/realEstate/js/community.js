@@ -18,7 +18,7 @@ var region = {
                         } else {
                             region._labels.push(row.title);
                         }
-                        return '<td><a href="/community/communityDetail/'+ row.title +'">' + row.title + '</a></td>';
+                        return '<td><a target="_blank" href="/community/communityDetail/'+ row.title +'">' + row.title + '</a></td>';
                     }
                 },
                 {title:'价格',data:'price', width:'4%',
@@ -36,14 +36,14 @@ var region = {
             ]},
             {
                 drawCallback: function() {
-                    region.resetChar()
-                    region.updateChar()
+                    region.resetChar();
+                    region.updateChar();
                 }
             });
     },
     resetChar : function () {
         region.chartOb.data.labels = [];
-        region.chartOb.chart.data.datasets.forEach((dataset) => {
+        region.chartOb.chart.data.datasets.forEach((dataset)=>{
             dataset.data = [];
         });
     },
