@@ -39,7 +39,7 @@
                     <div id="chart-container">
                         <div class="">
                             <div class="card">
-                                <div class="card-body" style="height: 430px;">
+                                <div class="card-body card-bodyh">
                                     {!! $chart->container() !!}
                                 </div>
                             </div>

@@ -20,6 +20,9 @@
     body {
         background-color : #eaf0f4;
     }
+    .card-bodyh {
+        height: 430px;
+    }
 </style>
 <div id="app">
     @include('layouts._header')

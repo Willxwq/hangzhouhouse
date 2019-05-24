@@ -21,7 +21,7 @@
                     <div class="card-header">
                         <i class="fa fa-info-circle fa-fw"></i> 基本信息
                     </div>
-                    <div class="card-body">
+                    <div class="card-body card-body">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <table class="table">
@@ -87,7 +87,7 @@
                                 <i class="fa fa-line-chart fa-fw"></i>历史均价走势
                                 <div class="pull-right" id="sell-button"></div>
                             </div>
-                            <div class="card-body" id="chart-unitprice">
+                            <div class="card-body card-body" id="chart-unitprice">
                                 {!! $data['historicalAvgPrice']->container(); !!}
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 <i class="fa fa-pie-chart fa-fw"></i>小区详细信息
                                 <div class="pull-right" id="detail-button"></div>
                             </div>
-                            <div class="card-body" id="chart-detail">
+                            <div class="card-body card-body" id="chart-detail">
                                 {!! $data['houseType']->container(); !!}
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                                 <i class="fa fa-line-chart fa-fw"></i>历史成交套数
                                 <div class="pull-right" id="count-button"></div>
                             </div>
-                            <div class="card-body" id="chart-count">
+                            <div class="card-body card-body" id="chart-count">
                                 {!! $data['transactions']->container(); !!}
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                                 <i class="fa fa-pie-chart fa-fw"></i>小区涨跌信息
                                 <div class="pull-right" id="tiaojia-button"></div>
                             </div>
-                            <div class="card-body" id="chart-tiaojia">
+                            <div class="card-body card-body" id="chart-tiaojia">
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                                 <i class="fa fa-bar-chart-o fa-fw"></i>在售价格信息
                                 <div class="pull-right" id="house-button"></div>
                             </div>
-                            <div class="card-body" id="chart-house">
+                            <div class="card-body card-body" id="chart-house">
                                 {!! $data['onSalePrice']->container(); !!}
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                                 <i class="fa fa-bar-chart-o fa-fw"></i>租房价格信息
                                 <div class="pull-right" id="rent-button"></div>
                             </div>
-                            <div class="card-body" id="chart-rent">
+                            <div class="card-body card-body" id="chart-rent">
                                 {!! $data['rentInfo']->container(); !!}
                             </div>
                         </div>
@@ -305,7 +305,7 @@
                                     <a class="btn btn-secondary btn-sm" role="button" onclick="showResource('公交')" id="bus-button">公交</a>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body card-body">
                                 <div id="allmap"></div>
                                 <div id="r-result"></div>
                             </div>
