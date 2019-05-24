@@ -485,7 +485,7 @@
     <div class="hand_right_middle_new"></div>
     <div class="hand_right_middle_new_left"></div>
     <div class="hand_right_middle_new_right"></div>
-    <div class="hand_right_middle_new_yu"><h2>余冰洁</h2></div>
+    <div class="hand_right_middle_new_yu"><h2>我的猪猪女朋友</h2></div>
     <!-- 左手 -->
     <div>
         <div class="hand_left_top"></div>
