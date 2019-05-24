@@ -42,26 +42,39 @@ class SellInfo extends BaseModel
         } else {
             $num = "h.totalPrice / s.totalPrice";
         }
-        $data['rows'] = DB::table('sellinfo as s')
+
+        $ob = DB::table('sellinfo as s')
             ->select(DB::raw("TRUNCATE((1 - ". $num .") * 100, 2) AS ups_or_downs"))
-            ->addSelect("s.houseID","s.totalPrice AS salePrice", "h.totalPrice", "s.link", "s.dealdate",
-                                "h.community", "h.square", "h.unitPrice", "h.validdate", "c.his")
+            ->addSelect("s.title","s.totalPrice AS salePrice", "h.totalPrice", "s.link", "s.dealdate",
+                                "h.unitPrice", "h.validdate", "c.his")
             ->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
             ->join(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) 
                                     AS c"),'c.houseID','=','s.houseID')
             ->where('s.dealdate', '>=', $startTime)
             ->where('s.dealdate', '<=', date('Y-m-d', time()))
+            ->whereRaw("(1 - ". $num .") > 0")
             ->whereRaw('(s.totalPrice - h.totalPrice) IS NOT NULL')
-            ->orderBy('ups_or_downs', 'desc')
-            ->offset(0)
-            ->limit(100)
+            ->orderBy('ups_or_downs', 'desc');
+
+        $count = $ob->count();
+
+        if ($count) {
+            $data['total'] = $count;
+            $data['curPage'] = $params['start'];
+            $data['pageSize'] = $params['length'];
+            $data['totalPage'] = ceil($count / $params['length']);
+        }
+
+        $data['rows'] = $ob
+            ->offset($params['start'])
+            ->limit($params['length'])
             ->get()
             ->toArray();
 
-        $data['total'] = count($data['rows']);
-        $data['curPage'] = 1;
-        $data['pageSize'] = 1;
-        $data['totalPage'] = 1;
+        //$data['total'] = $count;
+        //$data['curPage'] = 1;
+        //$data['pageSize'] = 1;
+        //$data['totalPage'] = 1;
 
         return $data;
     }

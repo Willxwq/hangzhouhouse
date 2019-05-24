@@ -25,6 +25,8 @@ class SellController extends BaseController
     {
         $param = $request->post();
         $params = [
+            'start' => $param['start'],
+            'length' => $param['length'],
             'time' => is_numeric($param['time']) ? $param['time'] : 1,
             'type' => is_numeric($param['type']) ? $param['type'] : 1
         ];
