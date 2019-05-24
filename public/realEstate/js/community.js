@@ -31,8 +31,6 @@ var region = {
                 {title:'地铁',data:'tagList', width:'12%'},
                 {title:'建成',data:'year', width:'5%'},
                 {title:'在售数量',data:'onsale', width:'3%'},
-                {title:'在租数量',data:'onrent', width:'3%'},
-                {title:'物业费',data:'cost', width:'3%'},
             ]},
             {
                 drawCallback: function() {
