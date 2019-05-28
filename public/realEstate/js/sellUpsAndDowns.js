@@ -63,5 +63,8 @@ var region = {
         region._time = time;
         region._type = type;
         J.dataTable.reload({time:time, type:type, showType:showType});
+    },
+    exportCsv : function () {
+        document.location.href = "/sell/ajax/exportCsv?type="+region._type+"&time="+region._time;
     }
 }

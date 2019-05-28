@@ -9,6 +9,9 @@
                 <div class="col-12">
                     <br>
                     <div class="col-md-12">
+                        <button class="btn btn-info" onclick="region.exportCsv()">
+                            导出
+                        </button>
                         <div class="col-lg-2 pull-right">
                             <select class="form-control" name="" id="time">
                                 <option value="1">最近一个月</option>

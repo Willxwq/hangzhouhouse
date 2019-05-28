@@ -57,7 +57,7 @@ class SellInfo extends BaseModel
         $ob = DB::table('sellinfo as s')
             ->select(DB::raw($select ." AS ups_or_downs"))
             ->addSelect("s.title","s.totalPrice AS salePrice", "h.totalPrice", "s.link", "s.dealdate",
-                                "h.unitPrice", "h.validdate", "c.his")
+                                "h.unitPrice", "h.validdate", "c.his", "h.community", "h.square")
             ->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
             ->join(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) 
                                     AS c"),'c.houseID','=','s.houseID')
@@ -70,6 +70,10 @@ class SellInfo extends BaseModel
         $count = $ob->count();
 
         if ($count) {
+            if (isset($params['isExport'])) {
+                $params['length'] = $count;
+            }
+
             $data['total'] = $count;
             $data['curPage'] = $params['start'];
             $data['pageSize'] = $params['length'];

@@ -30,4 +30,6 @@ Route::group(['prefix' => 'sell', 'namespace' => 'RealEstate'], function () {
     Route::get('sellUpsAndDowns', 'SellController@sellUpsAndDownsIndex')->name('sell.sellUpsAndDownsIndex');
     Route::get('ajax/getSellUpsAndDowns', 'SellController@getSellUpsAndDowns')
         ->name('sell.getSellUpsAndDowns');
+    Route::get('ajax/exportCsv', 'SellController@exportCsv')
+        ->name('sell.exportCsv');
 });
