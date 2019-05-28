@@ -9,7 +9,7 @@ class SellInfo extends BaseModel
 {
     protected $connectionArr = ['mysql', 'mysql_sh', 'mysql_gz', 'mysql_cq', 'mysql_cd'];
     protected $table = 'sellinfo';
-    protected $connection = 'mysql';
+    public $connection = 'mysql_sh';
 
     public function get()
     {
@@ -38,8 +38,6 @@ class SellInfo extends BaseModel
 
     public function getSellUpsAndDowns($params)
     {
-        $this->connection = $this->connectionArr[$params['city']];
-        self::elog($this->connection);
         $startTime = date('Y-m-d',strtotime('-'. $params['time'] .' month'));
         if ($params['showType'] == 1) {
             if ($params['type'] == 1) {
@@ -58,7 +56,7 @@ class SellInfo extends BaseModel
             $select = $num;
         }
 
-        $ob = DB::table('sellinfo as s')
+        $ob = DB::connection($this->connectionArr[$params['city']])->table('sellinfo as s')
             ->select(DB::raw($select ." AS ups_or_downs"))
             ->addSelect("s.title","s.totalPrice AS salePrice", "h.totalPrice", "s.link", "s.dealdate",
                                 "h.unitPrice", "h.validdate", "c.his", "h.community", "h.square")
