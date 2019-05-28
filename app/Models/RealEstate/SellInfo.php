@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class SellInfo extends BaseModel
 {
+    protected $connectionArr = ['mysql', 'mysql_sh', 'mysql_gz', 'mysql_cq', 'mysql_cd'];
     protected $table = 'sellinfo';
+    protected $connection = 'mysql';
 
     public function get()
     {
@@ -36,6 +38,8 @@ class SellInfo extends BaseModel
 
     public function getSellUpsAndDowns($params)
     {
+        $this->connection = $this->connectionArr[$params['city']];
+        self::elog($this->connection);
         $startTime = date('Y-m-d',strtotime('-'. $params['time'] .' month'));
         if ($params['showType'] == 1) {
             if ($params['type'] == 1) {

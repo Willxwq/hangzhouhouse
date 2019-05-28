@@ -13,6 +13,13 @@
                             导出
                         </button>
                         <div class="col-lg-2 pull-right">
+                            <select class="form-control" name="" id="city">
+                                <option value="0">杭州</option>
+                                <option value="1">上海</option>
+                                <option value="2">广州</option>
+                                <option value="3">重庆</option>
+                                <option value="4">成都</option>
+                            </select>
                             <select class="form-control" name="" id="time">
                                 <option value="1">最近一个月</option>
                                 <option value="3">最近3个月</option>
@@ -44,10 +51,13 @@
             region.bind('');
 
             $('#time').change(function(){
-                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val());
+                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val(), $('#city').val());
             });
             $('#showType').change(function(){
-                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val());
+                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val(), $('#city').val());
+            });
+            $('#city').change(function(){
+                region.getSellUpsAndDowns($('#time').val(), 1, "#00a65a", $('#showType').val(), $('#city').val());
             });
         });
 

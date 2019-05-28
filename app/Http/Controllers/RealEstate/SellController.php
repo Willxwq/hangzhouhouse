@@ -25,8 +25,9 @@ class SellController extends BaseController
     {
         $param = $request->post();
         $params = [
-            'start' => $param['start'],
-            'length' => $param['length'],
+            'city' => is_numeric($param['city']) ? $param['city'] : 0,
+            'start' => is_numeric($param['start']) ? $param['start'] : 0,
+            'length' => is_numeric($param['length']) ? $param['length'] : 30,
             'time' => is_numeric($param['time']) ? $param['time'] : 1,
             'showType' => is_numeric($param['showType']) ? $param['showType'] : 1,
             'type' => is_numeric($param['type']) ? $param['type'] : 1
@@ -36,12 +37,18 @@ class SellController extends BaseController
         return self::formatDate($list);
     }
 
+    /**
+     * 导出csv
+     * @param SellInfoService $sellInfoService
+     * @param Request $request
+     */
     public function exportCsv(SellInfoService $sellInfoService, Request $request)
     {
         $str = "标题";
 
         $param = $request->post();
         $params = [
+            'city' => is_numeric($param['city']) ? $param['city'] : 0,
             'start' => 0,
             'isExport' => 1,
             'time' => is_numeric($param['time']) ? $param['time'] : 1,

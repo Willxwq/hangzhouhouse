@@ -5,6 +5,7 @@ var region = {
     _totalPrice: [],
     _time: '',
     _type: '',
+    _city: '',
     _color: '#00a65a',
     _showType: 1,
     bind : function () {
@@ -57,14 +58,15 @@ var region = {
         );
         // J.dataTable.Columns["跌幅"].ColumnName="增幅";
     },
-    getSellUpsAndDowns : function (time, type, color, showType) {
+    getSellUpsAndDowns : function (time, type, color, showType, city) {
         region._showType = showType;
         region._color = color;
         region._time = time;
         region._type = type;
-        J.dataTable.reload({time:time, type:type, showType:showType});
+        region._city = city;
+        J.dataTable.reload({time:time, type:type, showType:showType, city:city});
     },
     exportCsv : function () {
-        document.location.href = "/sell/ajax/exportCsv?type="+region._type+"&time="+region._time;
+        document.location.href = "/sell/ajax/exportCsv?type="+region._type+"&time="+region._time+"&city="+region._city;
     }
 }
