@@ -60,8 +60,7 @@ class SellInfo extends BaseModel
             ->addSelect("s.title","s.totalPrice AS salePrice", "h.totalPrice", "s.link", "s.dealdate",
                                 "s.unitPrice", "c.his", "s.community", "s.square")
             ->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
-            ->join(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) 
-                                    AS c"),'c.houseID','=','s.houseID')
+            ->join(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) AS c"),'c.houseID','=','s.houseID')
             ->where('s.dealdate', '>=', $startTime)
             ->where('s.dealdate', '<=', date('Y-m-d', time()))
             ->whereRaw($num ." > 0")
