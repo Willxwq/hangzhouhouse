@@ -64,5 +64,5 @@
         });
 
     </script>
-    <script type="text/javascript" src="{{ URL::asset('/realEstate/js/sellUpsAndDowns.js?1') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('/realEstate/js/sellUpsAndDowns.js?111') }}"></script>
 @endsection
