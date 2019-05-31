@@ -15,7 +15,8 @@ var region = {
                 url:'sell/getSellUpsAndDowns',
                 data:{ time: this._time, type: this._type, showType: this._showType }
             },
-            pageLength: 10,
+            pagination: true, // 设置为true会在底部显示分页条
+            pageLength: 100,
             columns: [
                 {title:'标题',data:'title', width:'5%',
                     render: function (data, type, row, meta) {
