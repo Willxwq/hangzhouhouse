@@ -23,6 +23,113 @@
     .card-bodyh {
         height: 430px;
     }
+    .inputSty {
+        width: 35px;
+        height: 18px;
+        text-align: center;
+    }
+    .m-filter {
+        width: 1100px;
+        margin: 0 auto;
+        margin-top: 26px;
+        padding: 25px;
+        padding-bottom: 14px;
+        padding-top: 14px;
+        background-color: #fbfbfb;
+        box-shadow: 0 1px 2px -1px rgba(0,0,0,0.2);
+        font-size: 12px;
+        line-height: 1;
+        position: relative;
+    }
+    dl, dt, dd, ul, ol, li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    dl {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+    .m-filter dl {
+        overflow: hidden;
+    }
+    .m-filter dt {
+        float: left;
+        width: 4.5%;
+        font-weight: 700;
+        line-height: 27px;
+    }
+    .header .search {
+        width: 1150px;
+        margin: 0 auto;
+        margin-top: 25px;
+    }
+    .header .search .input input {
+        vertical-align: top;
+        box-sizing: border-box;
+        width: 710px;
+        height: 45px;
+        line-height: 45px;
+        padding: 0 22px;
+        border: 0;
+        box-shadow: 0 1px 2px -1px rgba(0,0,0,0.2);
+        border-radius: 2px;
+    }
+    input, textarea, button {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        resize: none;
+        font-family: "Hiragino Sans GB","Microsoft Yahei UI","Microsoft Yahei","微软雅黑",'Segoe UI',Tahoma,"宋体b8b\4f53",SimSun,sans-serif;
+    }
+    .header {
+        background-color: #f5f5f6;
+        line-height: 1;
+        padding: 30px 0 26px;
+    }
+    .header .search .input .inputRightPart .searchButton {
+        cursor: pointer;
+        width: 50px;
+        height: 45px;
+        display: inline-block;
+        text-align: center;
+        background-color: #fff;
+    }
+    .header .search .input .inputRightPart .searchButton i {
+        display: inline-block;
+        vertical-align: -4px;
+        background-position: -589px -96px;
+        width: 17px;
+        height: 17px;
+    }
+    .header .search .input {
+        display: inline-block;
+        position: relative;
+    }
+    .header .search .input .inputRightPart {
+        position: absolute;
+        right: 0;
+        top: -1px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        padding: 0;
+        font-size: 100%;
+        font-weight: normal;
+    }
+    .m-filter .list-more .customFilter input {
+        width: 35px;
+        height: 18px;
+        text-align: center;
+        border: 1px solid #b7b7b7;
+    }
+    .m-filter .list-more .customFilter {
+        margin-top: 5px;
+        float: left;
+    }
 </style>
 <div id="app">
     @include('layouts._header')

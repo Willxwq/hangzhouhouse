@@ -3,11 +3,14 @@ var region = {
     chartOb: {},
     _labels: [],
     _totalPrice: [],
-    _time: '',
-    _type: '',
-    _city: '',
+    _param: {},
+    _time: 1,
+    _type: 1,
+    _city: 0,
     _color: '#00a65a',
-    _showType: 1,
+    _bizcircle: '',
+    _community: '',
+    _showType: "1",
     bind : function () {
         region._dt=J.dataTable.bind("example", {
             "sPaginationType": "input",
@@ -24,8 +27,8 @@ var region = {
                         return '<td><a target="_blank" href="'+ row.link +'">' + row.title + '</a></td>';
                     }
                 },
-                {title:'<button onclick="region.getSellUpsAndDowns(region._time, 1, \'#00a65a\', region._showType)" class="btn btn-success">跌幅</button>' +
-                    '<button onclick="region.getSellUpsAndDowns(region._time, 2, \'#d73925\', region._showType)" class="btn btn-danger">涨幅</button>',data:'ups_or_downs', width:'4%',
+                {title:'<button onclick="region.setColor(\'#00a65a\')" class="btn btn-success">跌幅</button>' +
+                    '<button onclick="region.setColor(\'#d73925\')" class="btn btn-danger">涨幅</button>',data:'ups_or_downs', width:'4%',
                     render: function (data, type, row, meta) {
                         if (region._showType === "1") {
                             return '<td><a style="color: '+ region._color +'; font-size: 20px;">' + row.ups_or_downs + '%</a></td>';
@@ -67,15 +70,66 @@ var region = {
         );
         // J.dataTable.Columns["跌幅"].ColumnName="增幅";
     },
-    getSellUpsAndDowns : function (time, type, color, showType, city) {
-        region._showType = showType;
+    setColor : function (color) {
         region._color = color;
-        region._time = time;
-        region._type = type;
-        region._city = city;
-        J.dataTable.reload({time:time, type:type, showType:showType, city:city});
+        this.getSellUpsAndDowns();
     },
     exportCsv : function () {
         document.location.href = "/sell/ajax/exportCsv?type="+region._type+"&time="+region._time+"&city="+region._city;
-    }
+    },
+    getRegionList : function (type, districtId, city) {
+        J.ajaxFun({
+            url:'/community/getRegionList/' + type + '/' + districtId+ '/' + city,
+            data:{},
+            type:'get',
+            call:function(o){
+                if (districtId !== 0) {
+                    region.showBizcircleList(o);
+                } else {
+                    region.showDistrictList(o);
+                }
+            }
+        })
+    },
+    showDistrictList : function (data) {
+        $html = '';
+        $.each(data, function (i, n) {
+            $html += '<li class="nav-item"><a class="nav-link" data-id="'+ n.id +'" href="#">'+ n.district +'</a></li>';
+        });
+        $('#navtabs').append($html);
+    },
+    showBizcircleList : function (data) {
+        $("#nav").empty();
+        $html = '';
+        $.each(data, function (i, n) {
+            $html += '<li class="nav-item"><a class="nav-link" href="#">'+ n.bizcircle +'</a></li>';
+        });
+        $('#nav').append($html);
+
+        $('#nav .nav-link').on('click', function ($this) {
+            region.getCommunityDetailByBizcircle($(this).text());
+        });
+    },
+    getCommunityDetailByBizcircle : function (bizcircle) {
+        region._bizcircle = bizcircle;
+        region._community = $("#communityName").val();
+        this.getSellUpsAndDowns();
+    },
+    getSearchParams : function () {
+        var inputs = $("input");
+        inputs.each(function(){
+            region._param[this.name] = this.value;
+        });
+        region.getSellUpsAndDowns();
+    },
+    getSellUpsAndDowns : function () {
+        // params = {time:region._time, type:region._type, showType:region._showType,
+        //     city:region._city, bizcircle:region._bizcircle, community:region._community};
+        region._param["time"] = region._time;
+        region._param["type"] = region._type;
+        region._param["showType"] = region._showType;
+        region._param["city"] = region._city;
+        region._param["bizcircle"] = region._bizcircle;
+        J.dataTable.reload(region._param);
+    },
 }

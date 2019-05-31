@@ -3,10 +3,12 @@
 namespace App\Models\RealEstate;
 
 use App\Models\BaseModel;
+use Illuminate\Support\Facades\DB;
 
 class RegionDictionary extends BaseModel
 {
     protected $table = 'region_dictionary';
+    protected $connectionArr = ['mysql', 'mysql_sh', 'mysql_gz', 'mysql_cq', 'mysql_cd', 'mysql_sz', 'mysql_hf'];
 
     public function get()
     {
@@ -15,9 +17,11 @@ class RegionDictionary extends BaseModel
             ->get()->toArray();
     }
 
-    public function getRegionList($type = 1, $districtId)
+    public function getRegionList($type = 1, $districtId, $city)
     {
-        $result = $this->where('type', '=', $type);
+        $result = DB::connection($this->connectionArr[$city])
+            ->table($this->table)
+            ->where('type', '=', $type);
         if (!empty($districtId)) {
             $result->where('districtId', '=', $districtId);
         }

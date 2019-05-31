@@ -18,7 +18,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <center>
-                                    <h5 for="card-title">{{--获取商圈成交房源详细分析--}}</h5>
+                                    <h5 for="card-title"></h5>
                                 </center>
                                 <div class="input-group">
                                     <input id="bizcircle" type="text" class="form-control" placeholder="{{--请输入商区名称（例如转塘...）--}}">
@@ -65,10 +65,10 @@
 
     <script>
         $(document).ready(function () {
-            region.getRegionList(1, 0);
+            region.getRegionList(1, 0, 0);
 
             $('#navtabs .nav-link').on('click', function ($this) {
-                region.getRegionList(2, $(this).attr('data-id'));
+                region.getRegionList(2, $(this).attr('data-id'), 0);
             });
             region.bind('');
             region.chartOb = window.{{ $chart->id }};

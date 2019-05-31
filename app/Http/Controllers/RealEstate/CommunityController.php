@@ -77,9 +77,9 @@ class CommunityController extends BaseController
      * @param $districtId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getRegionList(RegionDictionaryService $regionDictionaryService, $type, $districtId)
+    public function getRegionList(RegionDictionaryService $regionDictionaryService, $type, $districtId, $city)
     {
-        $list = $regionDictionaryService::getRegionList($type, $districtId);
+        $list = $regionDictionaryService::getRegionList($type, $districtId, $city);
 
         return self::format(200, $list);
     }

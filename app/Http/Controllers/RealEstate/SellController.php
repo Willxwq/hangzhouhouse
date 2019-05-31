@@ -24,15 +24,17 @@ class SellController extends BaseController
     public static function getSellUpsAndDowns(SellInfoService $sellInfoService, Request $request)
     {
         $param = $request->post();
-        $params = [
-            'city' => is_numeric($param['city']) ? $param['city'] : 0,
-            'start' => is_numeric($param['start']) ? $param['start'] : 0,
-            'length' => is_numeric($param['length']) ? $param['length'] : 30,
-            'time' => is_numeric($param['time']) ? $param['time'] : 1,
-            'showType' => is_numeric($param['showType']) ? $param['showType'] : 1,
-            'type' => is_numeric($param['type']) ? $param['type'] : 1
-        ];
-        $list = $sellInfoService::getSellUpsAndDowns($params);
+        //$params = [
+        //    'city' => is_numeric($param['city']) ? $param['city'] : 0,
+        //    'bizcircle' => $param['bizcircle'],
+        //    'community' => $param['community'],
+        //    'start' => is_numeric($param['start']) ? $param['start'] : 0,
+        //    'length' => is_numeric($param['length']) ? $param['length'] : 30,
+        //    'time' => is_numeric($param['time']) ? $param['time'] : 1,
+        //    'showType' => is_numeric($param['showType']) ? $param['showType'] : 1,
+        //    'type' => is_numeric($param['type']) ? $param['type'] : 1
+        //];
+        $list = $sellInfoService::getSellUpsAndDowns($param);
 
         return self::formatDate($list);
     }

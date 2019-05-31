@@ -22,7 +22,7 @@ Route::get('downcommunity/{index}', 'house\HouseController@downcommunity')->name
 Route::group(['prefix' => 'community', 'namespace' => 'RealEstate'], function () {
     Route::get('', 'CommunityController@index')->name('community.index');
     Route::get('communityDetail/{communityName}', 'CommunityController@communityDetail')->name('community.communityDetail');
-    Route::get('getRegionList/{type}/{districtId}', 'CommunityController@getRegionList')->name('community.getRegionList');
+    Route::get('getRegionList/{type}/{districtId}/{city}', 'CommunityController@getRegionList')->name('community.getRegionList');
     Route::get('ajax/getCommunityDetailByBizcircle', 'CommunityController@getCommunityDetailByBizcircle')
         ->name('community.getCommunityDetailByBizcircle');
 });

@@ -54,9 +54,9 @@ var region = {
         region._labels = [];
         region.chartOb.update();
     },
-    getRegionList : function (type, districtId) {
+    getRegionList : function (type, districtId, city) {
         J.ajaxFun({
-            url:'/community/getRegionList/' + type + '/' + districtId,
+            url:'/community/getRegionList/' + type + '/' + districtId+ '/' + city,
             data:{},
             type:'get',
             call:function(o){

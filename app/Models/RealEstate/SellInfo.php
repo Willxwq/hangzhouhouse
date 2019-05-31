@@ -60,13 +60,34 @@ class SellInfo extends BaseModel
             ->addSelect("s.title","s.totalPrice AS salePrice", "s.listing_price AS totalPrice", "s.link", "s.dealdate",
                                 "s.unitPrice", "c.his", "s.community", "s.square", "s.cycle")
             //->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
+            ->leftJoin('community', 'community.title', '=', 's.community')
             ->leftjoin(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) AS c"),'c.houseID','=','s.houseID')
             ->where('s.dealdate', '>=', $startTime)
             ->where('s.dealdate', '<=', date('Y-m-d', time()))
             ->whereRaw($num ." > 0")
-            ->whereRaw('(s.totalPrice - s.listing_price) IS NOT NULL')
-            ->orderBy('ups_or_downs', 'desc');
+            ->whereRaw('(s.totalPrice - s.listing_price) IS NOT NULL');
 
+        if (!empty($params['bizcircle'])) {
+            $ob->where('community.bizcircle', '=', $params['bizcircle']);
+        }
+
+        if (!empty($params['communityName'])) {
+            $ob->where('s.community', 'like', '%'. $params['communityName'] .'%');
+        }
+
+        if ($params['maxSquare'] != null && $params['minSquare'] != null) {
+            $ob->whereRaw("substring_index(s.square, '平', 1) BETWEEN ". $params['minSquare'] ." AND ". $params['maxSquare']);
+        }
+
+        if ($params['maxTotalPrice'] != null && $params['minTotalPrice'] != null) {
+            $ob->whereBetween('totalPrice', [$params['minTotalPrice'], $params['maxTotalPrice']]);
+        }
+
+        if ($params['maxUnitPrice'] != null && $params['minUnitPrice'] != null) {
+            $ob->whereBetween('unitPrice', [$params['minUnitPrice'] * 10000, $params['maxUnitPrice'] * 10000]);
+        }
+
+        $ob->orderBy('ups_or_downs', 'desc');
         $count = $ob->count();
 
         if ($count) {

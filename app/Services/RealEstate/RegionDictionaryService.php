@@ -8,9 +8,9 @@ use App\Services\BaseServices;
 
 class RegionDictionaryService extends BaseServices
 {
-    public static function getRegionList($type, $districtId)
+    public static function getRegionList($type, $districtId, $city)
     {
-        return (new RegionDictionary())->getRegionList($type, $districtId);
+        return (new RegionDictionary())->getRegionList($type, $districtId, $city);
     }
 
     public static function getHouseTypeByCommunity($communityName)
