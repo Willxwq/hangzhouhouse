@@ -73,7 +73,7 @@ class SellController extends BaseController
             }
             $arrVal = [
                 $v->title, $v->ups_or_downs, $ups_or_downs, $v->community, $v->totalPrice, $v->salePrice, $v->square,
-                $v->cycle, $v->validdate, $v->his, $v->link
+                $v->cycle, $v->dealdate, $v->his, $v->link
             ];
             $str .= implode('-~', $arrVal);
             $str .= "\r\n";
