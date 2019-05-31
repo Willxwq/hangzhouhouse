@@ -63,7 +63,7 @@ class SellController extends BaseController
         } else {
             $str .= '-~涨(百分比)-~涨(数值)';
         }
-        $str .= "-~小区-~挂牌价格-~成交价格-~平方-~成交时间-~历史调价-~链接\r\n";
+        $str .= "-~小区-~挂牌价格-~成交价格-~平方-~成交周期-~成交时间-~历史调价-~链接\r\n";
 
         foreach ($data['rows'] as $v) {
             if ($param['type'] == 1) {
@@ -73,7 +73,7 @@ class SellController extends BaseController
             }
             $arrVal = [
                 $v->title, $v->ups_or_downs, $ups_or_downs, $v->community, $v->totalPrice, $v->salePrice, $v->square,
-                $v->validdate, $v->his, $v->link
+                $v->cycle, $v->validdate, $v->his, $v->link
             ];
             $str .= implode('-~', $arrVal);
             $str .= "\r\n";
