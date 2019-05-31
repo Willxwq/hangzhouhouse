@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class SellInfo extends BaseModel
 {
-    protected $connectionArr = ['mysql', 'mysql_sh', 'mysql_gz', 'mysql_cq', 'mysql_cd'];
+    protected $connectionArr = ['mysql', 'mysql_sh', 'mysql_gz', 'mysql_cq', 'mysql_cd', 'mysql_sz', 'mysql_hf'];
     protected $table = 'sellinfo';
 
     public function get()
@@ -40,17 +40,17 @@ class SellInfo extends BaseModel
         $startTime = date('Y-m-d',strtotime('-'. $params['time'] .' month'));
         if ($params['showType'] == 1) {
             if ($params['type'] == 1) {
-                $num = "s.listing_price / s.listing_price";
+                $num = "s.totalPrice / s.listing_price";
             } else {
-                $num = "s.listing_price / s.listing_price";
+                $num = "s.listing_price / s.totalPrice";
             }
             $select = "TRUNCATE((1 - ". $num .") * 100, 2)";
             $num = "(1 - ". $num .")";
         } else {
             if ($params['type'] == 1) {
-                $num = "s.listing_price - s.listing_price";
+                $num = "s.listing_price - s.totalPrice";
             } else {
-                $num = "s.listing_price - s.listing_price";
+                $num = "s.totalPrice - s.listing_price";
             }
             $select = $num;
         }
@@ -60,11 +60,11 @@ class SellInfo extends BaseModel
             ->addSelect("s.title","s.totalPrice AS salePrice", "s.listing_price AS totalPrice", "s.link", "s.dealdate",
                                 "s.unitPrice", "c.his", "s.community", "s.square", "s.cycle")
             //->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
-            ->join(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) AS c"),'c.houseID','=','s.houseID')
+            ->leftjoin(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) AS c"),'c.houseID','=','s.houseID')
             ->where('s.dealdate', '>=', $startTime)
             ->where('s.dealdate', '<=', date('Y-m-d', time()))
             ->whereRaw($num ." > 0")
-            ->whereRaw('(s.listing_price - s.listing_price) IS NOT NULL')
+            ->whereRaw('(s.totalPrice - s.listing_price) IS NOT NULL')
             ->orderBy('ups_or_downs', 'desc');
 
         $count = $ob->count();

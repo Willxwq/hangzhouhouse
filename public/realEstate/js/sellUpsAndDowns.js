@@ -38,9 +38,17 @@ var region = {
                         return '<td>' + row.totalPrice + '/' + row.salePrice + '</td>';
                     }
                 },
-                {title:'历史调价',data:'link', width:'6%',
+                {title:'成交周期（天）',data:'cycle', width:'6%',
                     render: function (data, type, row, meta) {
-                        return '<td>' + row.his + '</td>';
+                        return '<td>' + row.cycle + '</td>';
+                    }
+                },
+                {title:'历史调价',data:'his', width:'6%',
+                    render: function (data, type, row, meta) {
+                            if (row.his === null) {
+                                return '<td>暂无</td>';
+                            }
+                            return '<td>' + row.his + '</td>';
                     }
                 },
                 {title:'成交时间',data:'dealdate', width:'3%'}

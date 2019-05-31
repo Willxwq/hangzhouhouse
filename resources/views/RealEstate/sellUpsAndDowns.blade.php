@@ -19,6 +19,8 @@
                                 <option value="2">广州</option>
                                 <option value="3">重庆</option>
                                 <option value="4">成都</option>
+                                <option value="4">深圳</option>
+                                <option value="4">合肥</option>
                             </select>
                             <select class="form-control" name="" id="time">
                                 <option value="1">最近一个月</option>
