@@ -32,6 +32,7 @@ class SellController extends BaseController
         $params = $request->post();
         $params['city'] = empty($params['city']) ? 0 : $params['city'];
         $result = $sellInfoService::priceRiseAndDecline($params);
+
         return view('RealEstate.priceRiseAndDecline', ['totalChart' => $result['total'],
             'squareChart' => $result['square'], 'medianChart' => $result['median']]);
     }
