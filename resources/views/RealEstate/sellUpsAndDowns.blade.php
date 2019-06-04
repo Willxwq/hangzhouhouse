@@ -7,45 +7,6 @@
             <h3 style="text-align: center;"></h3>
             <div class="row">
                     <div class="col-12">
-                        {{--<button class="btn btn-info" onclick="region.exportCsv()">
-                            导出
-                        </button>
-                        <div class="col-lg-2 pull-right">
-                            <select class="form-control" name="" id="city">
-                                <option value="0">杭州</option>
-                                <option value="1">上海</option>
-                                <option value="2">广州</option>
-                                <option value="3">重庆</option>
-                                <option value="4">成都</option>
-                                <option value="4">深圳</option>
-                                <option value="4">合肥</option>
-                            </select>
-                            <select class="form-control" name="" id="time">
-                                <option value="1">最近一个月</option>
-                                <option value="3">最近3个月</option>
-                                <option value="6">半年</option>
-                            </select>
-                            <select class="form-control" name="" id="showType">
-                                <option value="1">百分百</option>
-                                <option value="2">数值</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 offset-md-3">
-                            <div id="alert"></div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <center>
-                                        <h5 for="card-title">--}}{{--获取商圈成交房源详细分析--}}{{--</h5>
-                                    </center>
-                                    <div class="input-group">
-                                        <input id="communityName" type="text" class="form-control" placeholder="请输入小区名称">
-                                        <span class="input-group-btn"><button class="btn btn-primary" type="button" onclick="region.getCommunityDetailByBizcircle('')">搜索</button></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>--}}
-
                         <div class="header">
                             <div class="menu"></div>
                             <div class="search">

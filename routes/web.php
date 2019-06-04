@@ -32,4 +32,5 @@ Route::group(['prefix' => 'sell', 'namespace' => 'RealEstate'], function () {
         ->name('sell.getSellUpsAndDowns');
     Route::get('ajax/exportCsv', 'SellController@exportCsv')
         ->name('sell.exportCsv');
+    Route::get('priceRiseAndDecline', 'SellController@priceRiseAndDeclineIndex')->name('sell.priceRiseAndDeclineIndex');
 });

@@ -114,4 +114,53 @@ class SellInfo extends BaseModel
 
         return $data;
     }
+
+    public function priceRiseAndDecline($params)
+    {
+        return DB::connection($this->connectionArr[$params['city']])
+            ->table('sellinfo as s')
+            ->select(DB::raw(
+                "YEAR( dealdate ) AS deldate_year,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 1 THEN totalPrice ELSE 0 END ) price_1,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 1 THEN square ELSE 0 END ) square_1,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 2 THEN totalPrice ELSE 0 END ) price_2,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 2 THEN square ELSE 0 END ) square_2,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 3 THEN totalPrice ELSE 0 END ) price_3,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 3 THEN square ELSE 0 END ) square_3,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 4 THEN totalPrice ELSE 0 END ) price_4,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 4 THEN square ELSE 0 END ) square_4,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 5 THEN totalPrice ELSE 0 END ) price_5,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 5 THEN square ELSE 0 END ) square_5,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 6 THEN totalPrice ELSE 0 END ) price_6,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 6 THEN square ELSE 0 END ) square_6,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 7 THEN totalPrice ELSE 0 END ) price_7,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 7 THEN square ELSE 0 END ) square_7,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 8 THEN totalPrice ELSE 0 END ) price_8,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 8 THEN square ELSE 0 END ) square_8,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 9 THEN totalPrice ELSE 0 END ) price_9,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 9 THEN square ELSE 0 END ) square_9,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 10 THEN totalPrice ELSE 0 END ) price_10,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 10 THEN square ELSE 0 END ) square_10,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 11 THEN totalPrice ELSE 0 END ) price_11,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 11 THEN square ELSE 0 END ) square_11,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 12 THEN totalPrice ELSE 0 END ) price_12,
+                    SUM( CASE WHEN MONTH ( dealdate ) = 12 THEN square ELSE 0 END ) square_12,
+                    group_concat( CASE WHEN MONTH(dealdate) =1 THEN (totalPrice / square) ELSE 0 END ) median_1,
+                    group_concat( CASE WHEN MONTH(dealdate) =2 THEN (totalPrice / square) ELSE 0 END ) median_2,
+                    group_concat( CASE WHEN MONTH(dealdate) =3 THEN (totalPrice / square) ELSE 0 END ) median_3,
+                    group_concat( CASE WHEN MONTH(dealdate) =4 THEN (totalPrice / square) ELSE 0 END ) median_4,
+                    group_concat( CASE WHEN MONTH(dealdate) =5 THEN (totalPrice / square) ELSE 0 END ) median_5,
+                    group_concat( CASE WHEN MONTH(dealdate) =6 THEN (totalPrice / square) ELSE 0 END ) median_6,
+                    group_concat( CASE WHEN MONTH(dealdate) =7 THEN (totalPrice / square) ELSE 0 END ) median_7,
+                    group_concat( CASE WHEN MONTH(dealdate) =8 THEN (totalPrice / square) ELSE 0 END ) median_8,
+                    group_concat( CASE WHEN MONTH(dealdate) =9 THEN (totalPrice / square) ELSE 0 END ) median_9,
+                    group_concat( CASE WHEN MONTH(dealdate) =10 THEN (totalPrice / square) ELSE 0 END ) median_10,
+                    group_concat( CASE WHEN MONTH(dealdate) =11 THEN (totalPrice / square) ELSE 0 END ) median_11,
+                    group_concat( CASE WHEN MONTH(dealdate) =12 THEN (totalPrice / square) ELSE 0 END ) median_12,
+                    COUNT( dealdate )"
+            ))
+            ->groupBy('deldate_year')
+            ->get()
+            ->toArray();
+        }
 }

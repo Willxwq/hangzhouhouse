@@ -12,12 +12,31 @@ use Illuminate\Http\Request;
  */
 class SellController extends BaseController
 {
+    /**
+     * 挂牌价&&成交价（议价空间）视图
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function sellUpsAndDownsIndex()
     {
         return view('RealEstate.sellUpsAndDowns', []);
     }
 
-    /** 售出涨跌
+    /**
+     * 创建 涨跌幅
+     * @param SellInfoService $sellInfoService
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function priceRiseAndDeclineIndex(SellInfoService $sellInfoService, Request $request)
+    {
+        $params = $request->post();
+        $params['city'] = 0;
+        $result = $sellInfoService::priceRiseAndDecline($params);
+        return view('RealEstate.priceRiseAndDecline', ['totalChart' => $result['total'],
+            'squareChart' => $result['square'], 'medianChart' => $result['median']]);
+    }
+
+    /** 挂牌价&&成交价（议价空间）
      * @param SellInfoService $sellInfoService
      * @param Request $request
      */
