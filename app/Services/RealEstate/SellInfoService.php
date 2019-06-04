@@ -148,7 +148,7 @@ class SellInfoService  extends BaseServices
             $sampleChartP
                 ->dataset($datum->deldate_year, 'line', $datumP)->options([
                     'borderColor' => self::$color[$num],
-                    'lineTension' => '0',
+                    'lineTension' => '0.4',
                     'fill' => false,
                     'hitRadius' => 20,
                 ]);
@@ -156,7 +156,7 @@ class SellInfoService  extends BaseServices
             $sampleChartM
                 ->dataset($datum->deldate_year, 'line', $datumM)->options([
                     'borderColor' => self::$color[$num],
-                    'lineTension' => '0',
+                    'lineTension' => '0.4',
                     'fill' => false,
                     'hitRadius' => 20,
                 ]);
@@ -164,7 +164,7 @@ class SellInfoService  extends BaseServices
             $sampleChart
                 ->dataset($datum->deldate_year, 'line', $datumS)->options([
                     'borderColor' => self::$color[$num],
-                    'lineTension' => '0',
+                    'lineTension' => '0.4',
                     'fill' => false,
                     'hitRadius' => 20,
                 ]);
