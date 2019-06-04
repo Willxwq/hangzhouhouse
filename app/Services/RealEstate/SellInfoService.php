@@ -19,7 +19,7 @@ class SellInfoService  extends BaseServices
      * @var array
      */
     private static $color = ['#3390dc', '#37c171', '#6cb2eb', '#ffed4a', '#e3342f', '#6c757c',
-                            '#fa84ae', '#8ad293', '#c092c6', '#5B5B5B', '#F08080', '#FFD700'];
+                            '#fa84ae', '#F08080', '#c092c6', '#5B5B5B', '#8ad293', '#FFD700'];
 
     /**
      * 获取小区详细
