@@ -7,7 +7,7 @@
             <h3 style="text-align: center;"></h3>
             <div class="row">
                 <div class="col-12">
-                    <div id="chart-container">
+                    <div id="chart-container" style="padding-bottom: 20px;">
                         <div class="">
                             <div class="card">
                                 <div class="card-body card-bodyh">
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div id="chart-container">
+                    <div id="chart-container" style="padding-bottom: 20px;">
                         <div class="">
                             <div class="card">
                                 <div class="card-body card-bodyh">
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div id="chart-container">
+                    <div id="chart-container" style="padding-bottom: 20px;">
                         <div class="">
                             <div class="card">
                                 <div class="card-body card-bodyh">
