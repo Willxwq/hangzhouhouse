@@ -40,7 +40,7 @@ class SellInfoService  extends BaseServices
     public static function priceRiseAndDecline($params)
     {
         $data = Redis::get('city'.$params['city']);
-        if (empty($result)) {
+        if (empty($data)) {
             $data =  (new SellInfo())->priceRiseAndDecline($params);
             Redis::set('city'.$params['city'], json_encode($data));
         } else {
