@@ -47,8 +47,8 @@
                                                 <option value="2">广州</option>
                                                 <option value="3">重庆</option>
                                                 <option value="4">成都</option>
-                                                <option value="4">深圳</option>
-                                                <option value="4">合肥</option>
+                                                <option value="5">深圳</option>
+                                                <option value="6">合肥</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-2">
