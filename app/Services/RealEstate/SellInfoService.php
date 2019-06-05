@@ -6,6 +6,7 @@ use App\Charts\SampleChart;
 use App\Models\RealEstate\SellInfo;
 use App\Services\BaseServices;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 
 class SellInfoService  extends BaseServices
@@ -39,10 +40,11 @@ class SellInfoService  extends BaseServices
      */
     public static function priceRiseAndDecline($params)
     {
-        $data = Redis::get('city'.$params['city']);
+        $redis = Cache::store('redis');
+        $data = $redis->get('city'.$params['city']);
         if (empty($data)) {
             $data =  (new SellInfo())->priceRiseAndDecline($params);
-            Redis::set('city'.$params['city'], json_encode($data));
+            $redis->put('city'.$params['city'], json_encode($data), 86400);
         } else {
             $data = json_decode($data);
         }
