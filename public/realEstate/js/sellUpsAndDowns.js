@@ -27,8 +27,8 @@ var region = {
                         return '<td><a target="_blank" href="'+ row.link +'">' + row.title + '</a></td>';
                     }
                 },
-                {title:'<button onclick="region.setColor(\'#00a65a\')" class="btn btn-success">跌幅</button>' +
-                    '<button onclick="region.setColor(\'#d73925\')" class="btn btn-danger">涨幅</button>',data:'ups_or_downs', width:'4%',
+                {title:'<button onclick="region.setColor(\'#00a65a\', \'1\')" class="btn btn-success">低于挂牌价</button>' +
+                    '<button onclick="region.setColor(\'#d73925\', \'2\')" class="btn btn-danger">高于挂牌价</button>',data:'ups_or_downs', width:'4%',
                     render: function (data, type, row, meta) {
                         if (region._showType === "1") {
                             return '<td><a style="color: '+ region._color +'; font-size: 20px;">' + row.ups_or_downs + '%</a></td>';
@@ -70,8 +70,9 @@ var region = {
         );
         // J.dataTable.Columns["跌幅"].ColumnName="增幅";
     },
-    setColor : function (color) {
+    setColor : function (color, showType) {
         region._color = color;
+        region._type = showType;
         this.getSellUpsAndDowns();
     },
     exportCsv : function () {
