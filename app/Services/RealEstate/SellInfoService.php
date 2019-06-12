@@ -149,7 +149,7 @@ class SellInfoService  extends BaseServices
                 if (empty($datum->$p)) {
                     $datumS[] = 0;
                 } else {
-                    $datumM[] = floor((collect( array_unique(explode(',', $datum->$m)) )->median())  * 10000);
+                    $datumM[] = collect( array_unique(explode(',', $datum->$m)) )->median();
                     $datumS[] = floor(( $datum->$p / $datum->$s ) * 10000);
                 }
             }
