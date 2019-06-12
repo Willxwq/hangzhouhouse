@@ -44,7 +44,7 @@ class SellInfoService  extends BaseServices
         $data = $redis->get('city'.$params['city']);
         if (empty($data)) {
             $data =  (new SellInfo())->priceRiseAndDecline($params);
-            $redis->put('city'.$params['city'], json_encode($data), 86400);
+            $redis->put('city'.$params['city'], json_encode($data), 1440);
         } else {
             $data = json_decode($data);
         }
