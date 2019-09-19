@@ -19,7 +19,6 @@ class SellInfo extends BaseModel
             ->get()->toArray();
     }
 
-
     public function getSellInfoByCommunity($communityName)
     {
         /* 打印SQL
@@ -163,4 +162,18 @@ class SellInfo extends BaseModel
             ->get()
             ->toArray();
         }
+
+    public function getMonthSell($timeArr)
+    {
+        $data = $this
+            ->addSelect("c.lng", "c.lat", "c.id", "sellinfo.unitPrice")
+            ->leftJoin('community AS c', 'c.title', '=', 'sellinfo.community')
+            //->whereRaw("DATE_FORMAT( sellinfo.`dealdate`, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )")
+            ->whereBetween("dealdate", $timeArr)
+            ->get()
+            ->toArray();
+
+        return $data;
+    }
+
 }

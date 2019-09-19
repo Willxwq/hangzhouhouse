@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Lib\Common;
 use App\Lib\DataFormatService;
 use App\Lib\ElogService;
 use Illuminate\Http\Request;
@@ -11,6 +11,7 @@ class BaseController extends Controller
 {
     use DataFormatService;
     use ElogService;
+    use Common;
 
     public static function conversionData($x, $y)
     {

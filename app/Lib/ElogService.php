@@ -4,7 +4,7 @@ namespace App\Lib;
 
 trait ElogService
 {
-    public static function elog($obj = null, $path = null)
+    public static function elog($obj = null, $path = "/Users/xuweiqi/var/php_log/php_error.log")
     {
         //SQL日志
         if ($obj == 'sql') {

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\BaseController;
+use App\Services\RealEstate\CommunityService;
 use App\Services\RealEstate\SellInfoService;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * Class SellController
@@ -110,5 +112,84 @@ class SellController extends BaseController
         header('Expires:0');
         header('Pragma:public');
         echo $str;
+    }
+
+    public function sellHeatMapIndex(){return view('RealEstate.sellHeatMap');}
+
+    public function sellMedianHeatMapIndex(){return view('RealEstate.sellMedianHeatMap');}
+
+    public function sellMedianHeatMapEventIndex(){return view('RealEstate.sellMedianHeatMapEvent');}
+
+    public function sellHeatMap(SellInfoService $sellInfoService, Request $request)
+    {
+        $year = $request->post();
+        $list = $sellInfoService::sellHeatMap($year['year']);
+
+        return self::formatDate(['rows' => $list]);
+    }
+
+    public function sellMedianHeatMap(SellInfoService $sellInfoService, Request $request)
+    {
+        $year = $request->post();
+        $list = $sellInfoService::sellMedianHeatMap($year['year']);
+
+        return self::formatDate(['rows' => $list]);
+    }
+
+    public function sellMedianHeatMapEvent(SellInfoService $sellInfoService, Request $request)
+    {
+        $year = $request->post();
+        $list = $sellInfoService::sellMedianHeatMapEvent($year['year']);
+
+        return self::formatDate(['rows' => $list]);
+    }
+
+    public function coverHeatMap()
+    {
+        $service = new CommunityService;
+        $url = "https://restapi.amap.com/v3/geocode/geo";
+
+        $data = $service::getAllCommunity();
+        $param = [
+            "key" => "1d6ca55d23197e9af0d01d872fcd563e",
+            "city" => 330100,
+            "batch" => "true",
+            "output" => "JSON"
+        ];
+        $count = count($data);
+
+        $num = 0;
+        $aa = 0;
+        $ids = [];
+        $coverData = [];
+        foreach ($data as $datum) {
+            $num++;
+            $param['address'] .= $datum['title']."|";
+            $ids[] = $datum['id'];
+            if ($num == 10) {
+                $param['address'] = rtrim($param['address'], "|");
+                $result =  self::requestApi($url, $param, "get");
+                if (empty($result['geocodes'])) {
+                    continue;
+                }
+                for ($i = 0; $i < count($result['geocodes']); $i++) {
+                    if (!empty($result['geocodes'][$i]["location"])) {
+                        $lngAndLat = explode(",", $result['geocodes'][$i]["location"]);
+                        $coverData[] = ['id' => $ids[$i], "lng" => $lngAndLat[0], "lat" => $lngAndLat[1]];
+                    }
+                }
+                if (!empty($coverData)) {
+                    $aa += count($coverData);
+                }
+                self::elog("总数：".$count." 完成：".$aa);
+                $service::saveLngAndLat($coverData);
+                $param['address'] = "";
+                unset($ids);
+                unset($coverData);
+                $num = 0;
+            }
+        }
+
+        return true;
     }
 }

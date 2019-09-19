@@ -34,3 +34,14 @@ Route::group(['prefix' => 'sell', 'namespace' => 'RealEstate'], function () {
         ->name('sell.exportCsv');
     Route::get('priceRiseAndDecline', 'SellController@priceRiseAndDeclineIndex')->name('sell.priceRiseAndDeclineIndex');
 });
+Route::group(['prefix' => 'map', 'namespace' => 'RealEstate'], function () {
+    Route::get('sell_heat_map', 'SellController@sellHeatMapIndex')->name('sell.sellHeatMapIndex');
+    Route::get('ajax/sellHeatMap', 'SellController@sellHeatMap')
+        ->name('sell.sellHeatMap');
+    Route::get('sell_median_heat_map', 'SellController@sellMedianHeatMapIndex')->name('sell.sellMedianHeatMapIndex');
+    Route::get('ajax/sellMedianHeatMap', 'SellController@sellMedianHeatMap')
+        ->name('sell.sellMedianHeatMap');
+    Route::get('sell_median_heat_map_event', 'SellController@sellMedianHeatMapEventIndex')->name('sell.sellMedianHeatMapEventIndex');
+    Route::get('ajax/sellMedianHeatMapEvent', 'SellController@sellMedianHeatMapEvent')
+        ->name('sell.sellMedianHeatMapEvent');
+});

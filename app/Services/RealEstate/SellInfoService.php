@@ -5,9 +5,7 @@ namespace App\Services\RealEstate;
 use App\Charts\SampleChart;
 use App\Models\RealEstate\SellInfo;
 use App\Services\BaseServices;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 
 class SellInfoService  extends BaseServices
 {
@@ -73,6 +71,144 @@ class SellInfoService  extends BaseServices
     public static function getSellUpsAndDowns($params)
     {
         return self::$sellInfo = (new SellInfo())->getSellUpsAndDowns($params);
+    }
+
+    /**
+     * 获取当前月的热力图经纬度数据
+     * @param $year
+     * @return array
+     */
+    public static function sellHeatMap($year)
+    {
+        switch ($year) {
+            case 2019:
+                $timeArr = ["2019-01-01", "2020-01-01"];
+            case 2018:
+                $timeArr = ["2018-01-01", "2019-01-01"];
+            case 2017:
+                $timeArr = ["2017-01-01", "2018-01-01"];
+        }
+        $redis = Cache::store('redis');
+        $redisData = $redis->get('sellHeatMap-' . $year);
+        if (empty($redisData)) {
+            $data = (new SellInfo())->getMonthSell($timeArr);
+            $result = [];
+            foreach ($data as $item) {
+                if (empty($item["lng"])) {
+                    continue;
+                }
+                if (empty($result[$item['id']])) {
+                    $result[$item['id']] = [
+                        "lng" => (float) $item["lng"],
+                        "lat" => (float) $item["lat"],
+                        "count" => 1
+                    ];
+                } else {
+                    $result[$item['id']]['count']+=1;
+                }
+            }
+            if ($year != 2019) {
+                $redis->put('sellHeatMap-' . $year, json_encode($result), 99999);
+            }
+        } else {
+            $result = (array)json_decode($redisData);
+        }
+        return array_values($result);
+    }
+
+    /**
+     * 获取当前月的热力图经纬度和中位平方价数据
+     * @param $year
+     * @return array
+     */
+    public static function sellMedianHeatMap($year)
+    {
+        switch ($year) {
+            case 2019:
+                $timeArr = ["2019-01-01", "2020-01-01"];
+            case 2018:
+                $timeArr = ["2018-01-01", "2019-01-01"];
+            case 2017:
+                $timeArr = ["2017-01-01", "2018-01-01"];
+        }
+        $redis = Cache::store('redis');
+        $redisData = $redis->get('sellMedianHeatMap-1000-' . $year);
+        if (empty($redisData)) {
+            $data = (new SellInfo())->getMonthSell($timeArr);
+            $result = [];
+            foreach ($data as $item) {
+                if (empty($item["lng"])) {
+                    continue;
+                }
+                if (empty($result[$item['id']])) {
+                    $result[$item['id']] = [
+                        "lng" => (float) $item["lng"],
+                        "lat" => (float) $item["lat"],
+                        "medianPrice" => [(float)$item['unitPrice']]
+                    ];
+                } else {
+                    $result[$item['id']]['medianPrice'][] = (float)$item['unitPrice'];
+                }
+            }
+
+            foreach ($result as &$value) {
+                $value["count"] = collect( array_unique($value['medianPrice']) )->median() / 1000;
+            }
+            if ($year != 2019) {
+                $redis->put('sellMedianHeatMap-1000-' . $year, json_encode($result), 99999);
+            }
+        } else {
+            $result = (array)json_decode($redisData);
+        }
+        return array_values($result);
+    }
+
+    /**
+     * 获取当前月的热力图经纬度和中位平方价数据
+     * 鼠标事件
+     * @param $year
+     * @return array
+     */
+    public static function sellMedianHeatMapEvent($year)
+    {
+        switch ($year) {
+            case 2019:
+                $timeArr = ["2019-01-01", "2020-01-01"];
+            case 2018:
+                $timeArr = ["2018-01-01", "2019-01-01"];
+            case 2017:
+                $timeArr = ["2017-01-01", "2018-01-01"];
+        }
+        $redis = Cache::store('redis');
+        $redisData = $redis->get('sellMedianHeatMap-' . $year);
+        if (empty($redisData)) {
+            $data = (new SellInfo())->getMonthSell($timeArr);
+            $result = [];
+            foreach ($data as $item) {
+                if (empty($item["lng"])) {
+                    continue;
+                }
+                if (empty($result[$item['id']])) {
+                    $result[$item['id']] = [
+                        "lng" => (float) $item["lng"],
+                        "lat" => (float) $item["lat"],
+                        "medianPrice" => [(float)$item['unitPrice']]
+                    ];
+                } else {
+                    $result[$item['id']]['medianPrice'][] = (float)$item['unitPrice'];
+                }
+            }
+
+            foreach ($result as &$value) {
+                $value["count"] = collect( array_unique($value['medianPrice']) )->median();
+            }
+            if ($year != 2019) {
+                $redis->put('sellMedianHeatMap-' . $year, json_encode($result), 99999);
+            }
+        } else {
+            $result = (array)json_decode($redisData);
+        }
+        return array_values($result);
     }
 
     /**
