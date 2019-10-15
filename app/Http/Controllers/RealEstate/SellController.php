@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\BaseController;
 use App\Services\RealEstate\CommunityService;
+use App\Services\RealEstate\DeepLearnService;
 use App\Services\RealEstate\SellInfoService;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -36,7 +37,7 @@ class SellController extends BaseController
         $result = $sellInfoService::priceRiseAndDecline($params);
 
         return view('RealEstate.priceRiseAndDecline', ['totalChart' => $result['total'],
-            'squareChart' => $result['square'], 'medianChart' => $result['median']]);
+            'squareChart' => $result['square'], 'medianChart' => $result['median'], 'sellCountChart' => $result['sellCount']]);
     }
 
     /** 挂牌价&&成交价（议价空间）
@@ -122,10 +123,12 @@ class SellController extends BaseController
 
     public function sellHeatMap(SellInfoService $sellInfoService, Request $request)
     {
-        $year = $request->post();
-        $list = $sellInfoService::sellHeatMap($year['year']);
+        //$year = $request->post();
+        //$list = $sellInfoService::sellHeatMap($year['year']);
 
-        return self::formatDate(['rows' => $list]);
+        (new DeepLearnService())->test();
+        return self::formatDate(['rows' => null]);
+        //return self::formatDate(['rows' => $list]);
     }
 
     public function sellMedianHeatMap(SellInfoService $sellInfoService, Request $request)

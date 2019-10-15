@@ -116,7 +116,32 @@ class SellInfo extends BaseModel
 
     public function priceRiseAndDecline($params)
     {
+        /* 可替代下面sql
+         * SELECT
+                SUM( totalPrice ),
+                SUM( square ),
+                group_concat( unitPrice ),
+                YEAR ( dealdate ),
+                MONTH ( dealdate )
+            FROM
+                sellinfo
+            GROUP BY
+                YEAR ( dealdate ),
+                MONTH ( dealdate );*/
         return DB::connection($this->connectionArr[$params['city']])
+            ->table('sellinfo')
+            ->select(DB::raw(
+                "SUM( totalPrice ) AS totalPrice,
+                    SUM( square ) AS square,
+                    group_concat( unitPrice ) AS unitPrice,
+                    count( * ) AS sellCount,
+                    YEAR ( dealdate ) AS year,
+                    MONTH ( dealdate ) AS month"
+            ))
+            ->groupBy(DB::raw('YEAR ( dealdate ), MONTH ( dealdate )'))
+            ->get()
+            ->toArray();
+        /*return DB::connection($this->connectionArr[$params['city']])
             ->table('sellinfo as s')
             ->select(DB::raw(
                 "YEAR( dealdate ) AS deldate_year,
@@ -160,7 +185,7 @@ class SellInfo extends BaseModel
             ))
             ->groupBy('deldate_year')
             ->get()
-            ->toArray();
+            ->toArray();*/
         }
 
     public function getMonthSell($timeArr)

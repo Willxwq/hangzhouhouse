@@ -35,6 +35,19 @@
                         <div class="">
                             <div class="card">
                                 <div class="card-body card-bodyh">
+                                    <h2 style="text-align: center;font-size: 24px;">成交套数</h2>
+                                    {!! $sellCountChart->container() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div id="chart-container" style="padding-bottom: 20px;">
+                        <div class="">
+                            <div class="card">
+                                <div class="card-body card-bodyh">
                                     <h2 style="text-align: center;font-size: 24px;">中位价</h2>
                                     {!! $medianChart->container() !!}
                                 </div>
@@ -62,6 +75,7 @@
 
 @section('script')
     {!! $totalChart->script()  !!}
+    {!! $sellCountChart->script()  !!}
     {!! $medianChart->script()  !!}
     {!! $squareChart->script()  !!}
 

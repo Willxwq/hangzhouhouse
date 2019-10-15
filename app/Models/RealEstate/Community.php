@@ -26,6 +26,15 @@ class Community extends BaseModel
             ->toArray();
     }
 
+    public function deepTest()
+    {
+        //return $this->select("district", "bizcircle", "year", "housetype", "house_num", "price")
+        return $this->select("year", "house_num", "price")
+            ->limit(100)
+            ->get()
+            ->toArray();
+    }
+
     public function averagePriceRankingOfEachRegion()
     {
         return $this->select(DB::raw('ROUND(AVG(price), 2) AS y'), 'district AS x')

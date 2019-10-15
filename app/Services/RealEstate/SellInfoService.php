@@ -6,6 +6,7 @@ use App\Charts\SampleChart;
 use App\Models\RealEstate\SellInfo;
 use App\Services\BaseServices;
 use Illuminate\Support\Facades\Cache;
+use PhpParser\Node\Expr\Array_;
 
 class SellInfoService  extends BaseServices
 {
@@ -260,38 +261,52 @@ class SellInfoService  extends BaseServices
     private static function createPriceRiseAndDeclineChart($data)
     {
         $sampleChart = new SampleChart();
+        $sampleChartC = new SampleChart();
         $sampleChartP = new SampleChart();
         $sampleChartM = new SampleChart();
         $monthData = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+        $sampleChartC->labels($monthData);
         $sampleChartP->labels($monthData);
         $sampleChartM->labels($monthData);
         $sampleChart->labels($monthData);
         $result = [];
         $num = 0;
+        $tempData = [];
 
         foreach ($data as $datum) {
-            if (empty($datum->deldate_year)) {
+            if (empty($datum->year)) {
                 continue;
             }
+
+            $tempData[$datum->year][$datum->month] = $datum;
+        }
+
+        foreach ($tempData as $tempKey => $tempDatum) {
+            $datumC = [];
             $datumP = [];
             $datumS = [];
             $datumM = [];
-
-            for ($i = 1; $i <= 12; $i++) {
-                $p = 'price_' . $i;
-                $s = 'square_' . $i;
-                $m = 'median_' . $i;
-                $datumP[] = floor($datum->$p);
-                if (empty($datum->$p)) {
+            foreach ($tempDatum as $item) {
+                $datumP[] = floor($item->totalPrice);
+                if (empty($item->totalPrice)) {
                     $datumS[] = 0;
                 } else {
-                    $datumM[] = collect( array_unique(explode(',', $datum->$m)) )->median();
-                    $datumS[] = floor(( $datum->$p / $datum->$s ) * 10000);
+                    $datumC[] = $item->sellCount;
+                    $datumM[] = collect( array_unique(explode(',', $item->unitPrice)) )->median();
+                    $datumS[] = floor(( $item->totalPrice / $item->square ) * 10000);
                 }
             }
 
+            $sampleChartC
+                ->dataset($tempKey, 'line', $datumC)->options([
+                    'borderColor' => self::$color[$num],
+                    'lineTension' => '0.4',
+                    'fill' => false,
+                    'hitRadius' => 20,
+                ]);
+
             $sampleChartP
-                ->dataset($datum->deldate_year, 'line', $datumP)->options([
+                ->dataset($tempKey, 'line', $datumP)->options([
                     'borderColor' => self::$color[$num],
                     'lineTension' => '0.4',
                     'fill' => false,
@@ -299,7 +314,7 @@ class SellInfoService  extends BaseServices
                 ]);
 
             $sampleChartM
-                ->dataset($datum->deldate_year, 'line', $datumM)->options([
+                ->dataset($tempKey, 'line', $datumM)->options([
                     'borderColor' => self::$color[$num],
                     'lineTension' => '0.4',
                     'fill' => false,
@@ -307,7 +322,7 @@ class SellInfoService  extends BaseServices
                 ]);
 
             $sampleChart
-                ->dataset($datum->deldate_year, 'line', $datumS)->options([
+                ->dataset($tempKey, 'line', $datumS)->options([
                     'borderColor' => self::$color[$num],
                     'lineTension' => '0.4',
                     'fill' => false,
@@ -317,6 +332,7 @@ class SellInfoService  extends BaseServices
         }
 
         $result['total'] = $sampleChartP;
+        $result['sellCount'] = $sampleChartC;
         $result['median'] = $sampleChartM;
         $result['square'] = $sampleChart;
         return $result;
