@@ -16,7 +16,7 @@ var region = {
             "sPaginationType": "input",
             ajax: {
                 url:'sell/getSellUpsAndDowns',
-                data:{ time: this._time, type: this._type, showType: this._showType }
+                data:{ time: this._time, type: this._type, showType: this._showType, city: this._city }
             },
             pagination: true, // 设置为true会在底部显示分页条
             pageLength: 100,
