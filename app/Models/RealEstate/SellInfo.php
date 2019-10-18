@@ -54,15 +54,35 @@ class SellInfo extends BaseModel
             $select = $num;
         }
 
-        $ob = DB::connection($this->connectionArr[$params['city']])->table('sellinfo as s')
+        $time = date('Y-m-d', time());
+
+        DB::connection()->enableQueryLog();
+        $ob = DB::table('sellinfo as s')
             ->select(DB::raw($select ." AS ups_or_downs"))
             ->addSelect("s.title","s.totalPrice AS salePrice", "s.listing_price AS totalPrice", "s.link", "s.dealdate",
                                 "s.unitPrice", "c.his", "s.community", "s.square", "s.cycle")
             //->leftJoin('houseinfo as h', 's.houseID', '=', 'h.houseID')
             ->leftJoin('community', 'community.title', '=', 's.community')
-            ->leftjoin(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) AS c"),'c.houseID','=','s.houseID')
+            //->leftjoin(DB::raw("(SELECT houseID, group_concat( totalPrice ORDER BY date ASC SEPARATOR '->') AS his FROM hisprice GROUP BY houseID) AS c"),'c.houseID','=','s.houseID')
+            ->leftjoin(DB::raw("(
+               SELECT
+                    h.houseID,
+                    group_concat( h.totalPrice ORDER BY h.date ASC SEPARATOR '->' ) AS his 
+               FROM
+                    hisprice AS h
+                    LEFT JOIN sellinfo AS s ON s.houseID = h.houseID 
+               WHERE
+                    s.dealdate >= '". $startTime ."'
+                    AND `s`.`dealdate` <= '" .$time. "' AND ( 1 - s.totalPrice / s.listing_price ) > 0 
+                    AND ".$num." > 0
+                    AND (s.totalPrice - s.listing_price) IS NOT NULL
+               GROUP BY
+                    houseID
+               ) AS c
+               "),'c.houseID','=','s.houseID'
+            )
             ->where('s.dealdate', '>=', $startTime)
-            ->where('s.dealdate', '<=', date('Y-m-d', time()))
+            ->where('s.dealdate', '<=', $time)
             ->whereRaw($num ." > 0")
             ->whereRaw('(s.totalPrice - s.listing_price) IS NOT NULL');
 
@@ -106,6 +126,8 @@ class SellInfo extends BaseModel
             ->get()
             ->toArray();
 
+        $log = DB::getQueryLog();
+        self::elog($log);
         //$data['total'] = $count;
         //$data['curPage'] = 1;
         //$data['pageSize'] = 1;
