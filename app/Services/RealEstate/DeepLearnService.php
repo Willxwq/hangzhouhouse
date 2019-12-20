@@ -9,10 +9,44 @@ use Phpml\CrossValidation\RandomSplit;
 use Phpml\Exception\InvalidArgumentException;
 use Phpml\Exception\LibsvmCommandException;
 use Phpml\Dataset\ArrayDataset;
+use Phpml\Association\Apriori;
 
 class DeepLearnService  extends BaseServices
 {
     public function test()
+    {
+        $samples = (new TestDataService)::getTestData();
+
+        try {
+
+            // try body
+            $labels  = [];
+            //$samples = [
+            //    ['啤酒', '尿布', '儿童玩具'],
+            //    ['尿布', '儿童玩具','笔记本电脑'],
+            //    ['啤酒','耳机', '唇膏'],
+            //    ['啤酒','唇膏', '高跟鞋']
+            //];
+            $associator = new Apriori($support = 0.1, $confidence = 0.1);
+            $associator->train($samples, $labels);
+
+            $res = $associator->apriori();
+            self::elog($res);
+
+            $res = $associator->predict([20]);
+
+            //self::elog($res);
+            $rules = $associator->getRules();
+            self::elog($res);
+            self::elog($rules);
+
+        } catch (LibsvmCommandException $e) {
+            self::elog("-----false------");
+        } catch (InvalidArgumentException $e) {
+        }
+    }
+
+    public function test_bak()
     {
         $redis = Cache::store('redis');
         $data = json_decode($redis->get('city0'));

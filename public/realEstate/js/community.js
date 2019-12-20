@@ -34,8 +34,10 @@ var region = {
             ]},
             {
                 drawCallback: function() {
-                    region.resetChar();
-                    region.updateChar();
+                    if (region.chartOb.data != null) {
+                        region.resetChar();
+                        region.updateChar();
+                    }
                 }
             });
     },

@@ -126,8 +126,6 @@ class SellInfo extends BaseModel
             ->get()
             ->toArray();
 
-        $log = DB::getQueryLog();
-        self::elog($log);
         //$data['total'] = $count;
         //$data['curPage'] = 1;
         //$data['pageSize'] = 1;

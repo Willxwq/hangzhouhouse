@@ -123,6 +123,7 @@ class SellController extends BaseController
 
     public function sellHeatMap(SellInfoService $sellInfoService, Request $request)
     {
+        set_time_limit(0);
         //$year = $request->post();
         //$list = $sellInfoService::sellHeatMap($year['year']);
 
