@@ -88,32 +88,12 @@ class HouseInfoService extends BaseServices
 
         $sampleChart->labels(array_values(array_unique($labels)));
 
-        if (!empty($data[trim(self::$decoration[0])])) {
+        foreach (self::$decoration as $itemK => $itemV) {
+            $tempData = empty($data[self::$decoration[$itemK]]) ? [] : array_values($data[self::$decoration[$itemK]]);
             $sampleChart
-                ->dataset(self::$decoration[0], 'bar', array_values($data[self::$decoration[0]]))
+                ->dataset(self::$decoration[$itemK], 'bar', $tempData)
                 ->options([
-                    'backgroundColor' => self::$color[0],
-                ]);
-        }
-        if (!empty($data[trim(self::$decoration[1])])) {
-            $sampleChart
-                ->dataset(self::$decoration[1], 'bar', array_values($data[self::$decoration[1]]))
-                ->options([
-                    'backgroundColor' => self::$color[1],
-                ]);
-        }
-        if (!empty($data[trim(self::$decoration[2])])) {
-            $sampleChart
-                ->dataset(self::$decoration[2], 'bar', array_values($data[self::$decoration[2]]))
-                ->options([
-                    'backgroundColor' => self::$color[2],
-                ]);
-        }
-        if (!empty($data[trim(self::$decoration[3])])) {
-            $sampleChart
-                ->dataset(self::$decoration[3], 'bar', array_values($data[self::$decoration[3]]))
-                ->options([
-                    'backgroundColor' => self::$color[3],
+                    'backgroundColor' => self::$color[$itemK],
                 ]);
         }
         return $sampleChart;
