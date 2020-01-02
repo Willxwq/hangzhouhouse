@@ -75,6 +75,16 @@ class SellInfoService  extends BaseServices
     }
 
     /**
+     * 挂牌价&&成交价（议价空间）
+     * @param $params
+     * @return mixed
+     */
+    public static function getSellList($params)
+    {
+        return self::$sellInfo = (new SellInfo())->getSellList($params);
+    }
+
+    /**
      * 获取当前月的热力图经纬度数据
      * @param $year
      * @return array

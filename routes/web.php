@@ -28,8 +28,11 @@ Route::group(['prefix' => 'community', 'namespace' => 'RealEstate'], function ()
 });
 Route::group(['prefix' => 'sell', 'namespace' => 'RealEstate'], function () {
     Route::get('sellUpsAndDowns', 'SellController@sellUpsAndDownsIndex')->name('sell.sellUpsAndDownsIndex');
+    Route::get('sellList', 'SellController@sellListIndex')->name('sell.sellListIndex');
     Route::get('ajax/getSellUpsAndDowns', 'SellController@getSellUpsAndDowns')
         ->name('sell.getSellUpsAndDowns');
+    Route::get('ajax/getSellList', 'SellController@getSellList')
+        ->name('sell.getSellList');
     Route::get('ajax/exportCsv', 'SellController@exportCsv')
         ->name('sell.exportCsv');
     Route::get('priceRiseAndDecline', 'SellController@priceRiseAndDeclineIndex')->name('sell.priceRiseAndDeclineIndex');

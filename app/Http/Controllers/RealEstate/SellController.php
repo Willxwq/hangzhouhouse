@@ -25,6 +25,15 @@ class SellController extends BaseController
     }
 
     /**
+     * 在售视图
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function sellListIndex()
+    {
+        return view('RealEstate.sellList', []);
+    }
+
+    /**
      * 创建 涨跌幅
      * @param SellInfoService $sellInfoService
      * @param Request $request
@@ -58,6 +67,18 @@ class SellController extends BaseController
         //    'type' => is_numeric($param['type']) ? $param['type'] : 1
         //];
         $list = $sellInfoService::getSellUpsAndDowns($param);
+
+        return self::formatDate($list);
+    }
+
+    /** 挂牌价&&成交价（议价空间）
+     * @param SellInfoService $sellInfoService
+     * @param Request $request
+     */
+    public static function getSellList(SellInfoService $sellInfoService, Request $request)
+    {
+        $param = $request->post();
+        $list = $sellInfoService::getSellList($param);
 
         return self::formatDate($list);
     }

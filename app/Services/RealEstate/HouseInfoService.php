@@ -39,7 +39,7 @@ class HouseInfoService extends BaseServices
     {
         self::getHouseInfoByCommunity($communityName);
         $result['houseType'] = self::getHouseTypeDoughnutChart();
-        $result['onSalePrice'] = self::creatHouseOnSalePriceChart();
+        $result['onSalePrice'] = self::createHouseOnSalePriceChart();
 
         return $result;
     }
@@ -62,7 +62,7 @@ class HouseInfoService extends BaseServices
         return $sampleChart;
     }
 
-    public static function creatHouseOnSalePriceChart()
+    public static function createHouseOnSalePriceChart()
     {
         $sampleChart = new SampleChart();
 

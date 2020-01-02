@@ -134,6 +134,80 @@ class SellInfo extends BaseModel
         return $data;
     }
 
+    public function getSellList($params)
+    {
+        if ($params['showType'] == 1) {
+            if ($params['type'] == 1) {
+                $select = "TRUNCATE((1 - `houseinfo`.`totalPrice` / substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 )) * 100, 2) AS agio";
+            } else {
+                $select = "TRUNCATE((1 - substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 ) / `houseinfo`.`totalPrice` ) * 100, 2) AS agio";
+            }
+        } else {
+            if ($params['type'] == 1) {
+                $select = " `houseinfo`.`totalPrice` - substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 ) AS agio ";
+            } else {
+                $select = " substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 ) - `houseinfo`.`totalPrice` AS agio ";
+            }
+        }
+
+        DB::connection()->enableQueryLog();
+        $ob = DB::table('hisprice as hp')
+            ->select(DB::raw($select . " , group_concat( hp.totalPrice ORDER BY hp.date ASC SEPARATOR '>' ) AS priceAdjust "))
+            ->addSelect('houseinfo.houseID', 'houseinfo.totalPrice', 'houseinfo.link',
+                'houseinfo.community', 'houseinfo.square', 'houseinfo.title',
+                'houseinfo.validdate', 'houseinfo.unitPrice')
+            ->leftJoin('houseinfo', 'houseinfo.houseID', '=', 'hp.houseID')
+            ->leftJoin('community', 'community.title', '=', 'houseinfo.community')
+            ->leftJoin('sellinfo', 'sellinfo.houseID', '=', 'hp.houseID')
+            ->whereNull('sellinfo.totalPrice')
+            ->where('houseinfo.shelf', "=", "1");
+
+        if (!empty($params['bizcircle'])) {
+            $ob->where('community.bizcircle', '=', $params['bizcircle']);
+        }
+
+        if (!empty($params['communityName'])) {
+            $ob->where('houseinfo.community', 'like', '%'. $params['communityName'] .'%');
+        } else {
+            $ob->where('houseinfo.community', 'like', '%寰宇天下%');
+        }
+
+        if ($params['maxSquare'] != null && $params['minSquare'] != null) {
+            $ob->whereRaw("substring_index(houseinfo.square, '平', 1) BETWEEN ". $params['minSquare'] ." AND ". $params['maxSquare']);
+        }
+
+        if ($params['maxTotalPrice'] != null && $params['minTotalPrice'] != null) {
+            $ob->whereBetween('houseinfo.totalPrice', [$params['minTotalPrice'], $params['maxTotalPrice']]);
+        }
+
+        if ($params['maxUnitPrice'] != null && $params['minUnitPrice'] != null) {
+            $ob->whereBetween('houseinfo.unitPrice', [$params['minUnitPrice'] * 10000, $params['maxUnitPrice'] * 10000]);
+        }
+
+        $count = $ob->count();
+
+        if ($count) {
+            if (isset($params['isExport'])) {
+                $params['length'] = $count;
+            }
+
+            $data['total'] = $count;
+            $data['curPage'] = $params['start'];
+            $data['pageSize'] = $params['length'];
+            $data['totalPage'] = ceil($count / $params['length']);
+        }
+        $ob->groupBy('hp.houseID');
+        $ob->orderBy('agio', 'DESC');
+
+        $data['rows'] = $ob
+            ->offset($params['start'])
+            ->limit($params['length'])
+            ->get()
+            ->toArray();
+
+        return $data;
+    }
+
     public function priceRiseAndDecline($params)
     {
         return DB::connection($this->connectionArr[$params['city']])
