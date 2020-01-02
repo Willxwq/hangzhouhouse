@@ -160,7 +160,7 @@ class SellInfo extends BaseModel
             ->leftJoin('community', 'community.title', '=', 'houseinfo.community')
             ->leftJoin('sellinfo', 'sellinfo.houseID', '=', 'hp.houseID')
             ->whereNull('sellinfo.totalPrice')
-            ->whereDay('houseinfo.validdate', date("Y-m-d", time()))
+            ->where('houseinfo.validdate', '>=', date("Y-m-d", time()))
             ->where('houseinfo.shelf', "=", "1");
 
         if (!empty($params['bizcircle'])) {
@@ -170,7 +170,7 @@ class SellInfo extends BaseModel
         if (!empty($params['communityName'])) {
             $ob->where('houseinfo.community', 'like', '%'. $params['communityName'] .'%');
         } else {
-            $ob->where('houseinfo.community', 'like', '%寰宇天下%');
+            $ob->where('houseinfo.community', '=', '寰宇天下');
         }
 
         if ($params['maxSquare'] != null && $params['minSquare'] != null) {
