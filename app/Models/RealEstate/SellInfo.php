@@ -160,6 +160,7 @@ class SellInfo extends BaseModel
             ->leftJoin('community', 'community.title', '=', 'houseinfo.community')
             ->leftJoin('sellinfo', 'sellinfo.houseID', '=', 'hp.houseID')
             ->whereNull('sellinfo.totalPrice')
+            ->whereDay('houseinfo.validdate', date("Y-m-d", time()))
             ->where('houseinfo.shelf', "=", "1");
 
         if (!empty($params['bizcircle'])) {
