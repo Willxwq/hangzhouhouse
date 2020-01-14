@@ -144,9 +144,9 @@ class SellInfo extends BaseModel
             }
         } else {
             if ($params['type'] == 1) {
-                $select = " `houseinfo`.`totalPrice` - substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 ) AS agio ";
-            } else {
                 $select = " substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 ) - `houseinfo`.`totalPrice` AS agio ";
+            } else {
+                $select = " `houseinfo`.`totalPrice` - substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 ) AS agio ";
             }
         }
 
