@@ -136,6 +136,7 @@ class SellInfo extends BaseModel
 
     public function getSellList($params)
     {
+        $startTime = date('Y-m-d',strtotime('-'. $params['time'] .' month'));
         if ($params['showType'] == 1) {
             if ($params['type'] == 1) {
                 $select = "TRUNCATE((1 - `houseinfo`.`totalPrice` / substring_index( group_concat( hp.totalPrice ORDER BY hp.date ), ',', 1 )) * 100, 2) AS agio";
@@ -160,7 +161,7 @@ class SellInfo extends BaseModel
             ->leftJoin('community', 'community.title', '=', 'houseinfo.community')
             ->leftJoin('sellinfo', 'sellinfo.houseID', '=', 'hp.houseID')
             ->whereNull('sellinfo.totalPrice')
-            ->where('houseinfo.validdate', '>=', date("Y-m-d", time()))
+            ->where('houseinfo.validdate', '>=', $startTime)
             ->where('houseinfo.shelf', "=", "1");
 
         if (!empty($params['bizcircle'])) {
