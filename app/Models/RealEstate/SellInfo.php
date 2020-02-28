@@ -170,8 +170,6 @@ class SellInfo extends BaseModel
 
         if (!empty($params['communityName'])) {
             $ob->where('houseinfo.community', 'like', '%'. $params['communityName'] .'%');
-        } else {
-            $ob->where('houseinfo.community', '=', '寰宇天下');
         }
 
         if ($params['maxSquare'] != null && $params['minSquare'] != null) {
